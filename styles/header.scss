@@ -1,0 +1,33 @@
+@import 'colors';
+
+.navbar {
+  width: 100vw;
+  height: 100px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: $primary-color;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px 60px;
+  z-index: 1000;
+}
+
+.nav-left {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-right {
+  display: inline-flex;
+  align-items: center;
+  font: 500 1rem "Montserrat", sans-serif;
+  color: $secondary-color;
+}
+
+.nav-link {
+  display: inline;
+  font: 500 1rem "Montserrat", sans-serif;
+  color: $secondary-color;
+}
