@@ -1,0 +1,18 @@
+@import 'colors';
+
+.index-splash {
+  width: 100vw;
+  height: 100vh;
+  padding: 220px 120px 120px 120px;
+}
+
+.index-splash-title {
+  font: 600 7rem "Syne", sans-serif;
+}
+
+.index-featured, .index-listings {
+  width: 100vw;
+  height: calc(100vh - 100px);
+  box-sizing: border-box;
+  padding: 60px 120px;
+}
