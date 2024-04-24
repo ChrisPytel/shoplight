@@ -1,22 +1,24 @@
 .navbar {
   width: 100vw;
   height: 100px;
+  box-sizing: border-box;
   position: fixed;
   top: 0px;
   left: 0px;
   background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px 60px;
 }
 
 .nav-left {
-  width: 50vw;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-right {
-  width: 50vw;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-link {
