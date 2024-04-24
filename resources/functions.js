@@ -1,6 +1,5 @@
 // ----------------- Helper Functions -----------------
 
-const bcrypt = require("bcryptjs");  //Give us access to the hashing tool bycrpyt to secure our passwords/cookies
 const database = require('./databases');  //imports our database to perform actions with
 
 //Generates a random string for our shortURLS and UserIDs
@@ -10,25 +9,15 @@ const generateRandomString = function() {
 
 //Creates a new user after pressing register for a new account
 const createNewUser = function(email, password) {
-  const hashedPassword = bcrypt.hashSync(password, 10);
   const newUserID = generateRandomString();
   database.users[newUserID] = {  //Creates a new database entry for our new user and defines values
     id: newUserID,
     email,
-    password: hashedPassword
+    password
   };
   return newUserID;
 };
 
-//Checks against the database entry for that given user to see if it exists already
-const isEmailRegistered = function(newUser) {
-  for (const ID in database.users) {
-    if (newUser === database.users[ID].email) {
-      return true;
-    }
-  }
-  return false;
-};
 
 //After pressing login button, POST route calls this to verify login credentials
 const checkLoginCredentials = function(loginEmail, loginPassword) {
@@ -50,29 +39,26 @@ const getUserByID = function(userID, userDatabase) {
   }
 };
 
-//Checks our database for a userID match. If so, returns an object of matching URLS
-const urlsForUser = function(userID, urlDatabase) {
-  let urlsForThisUser = {};
-  for (const ID in urlDatabase) {
-    if (urlDatabase[ID].userID === userID) {
-      urlsForThisUser[ID] = urlDatabase[ID];
+
+// ---------------------  registry functions - Skip for now ---------------------
+
+//Checks against the database entry for that given user to see if it exists already
+const isEmailRegistered = function(newUser) {
+  for (const ID in database.users) {
+    if (newUser === database.users[ID].email) {
+      return true;
     }
   }
-  return urlsForThisUser;
+  return false;
 };
 
-//Verifies if a user has access to modifiy/delete a given shortURL
-const checkURLOwnership = function(userID, shortURL, urlDatabase) {
-  return (userID === urlDatabase[shortURL].userID);
-};
 
 //Exports modules to use across other files in our project
 module.exports = {
   generateRandomString,
   createNewUser,
-  isEmailRegistered,
   checkLoginCredentials,
   getUserByID,
-  urlsForUser,
-  checkURLOwnership
+  isEmailRegistered,
+
 };
