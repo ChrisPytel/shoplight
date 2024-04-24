@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/index.css" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +38,7 @@
   <%- include('partials/_header') %>
 
   <section class="index-splash">
-    <img src="https://placehold.co/600x400">
+    <div class="index-splash-title">ShopLight</div>
   </section>
 
   <section class="index-featured">
@@ -60,6 +61,8 @@
       </div>
     </section>
   </section>
+
+  <%- include('partials/_footer.ejs') %>
 </body>
 
 </html>
