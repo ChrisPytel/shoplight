@@ -2,23 +2,59 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>ShopLight</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
+  <!-- Bootstrap CSS -->
+  <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"/>
+
+  <!-- Pre-installed CSS -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/nav.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <%- include('partials/_header') %>
+
+  <section class="index-splash">
+    <img src="https://placehold.co/600x400">
+  </section>
+
+  <section class="index-featured">
+    <h1>Featured</h1>
+
+    <div class="featured-products">
+      Carousel here
+    </div>
+  </section>
+
+  <section class="index-listings">
+    <section class="index-listings-top">
+      <div class="index-listings-top-title">
+        <h1>Products</h1>
+      </div>
+
+      <div class="index-listings-top-filter">
+        Filter by:
+        Dropdown here
+      </div>
+    </section>
+  </section>
 </body>
 
 </html>
