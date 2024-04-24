@@ -37,6 +37,7 @@ const registerRoutes = require('./routes/register');
 const logoutRoute = require('./routes/logout');
 const myListingsRoutes = require('./routes/my-listings');
 const messagesRoutes = require('./routes/messages');
+const searchRoutes = require('./routes/search');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,6 +51,7 @@ app.use('/register', registerRoutes);
 app.use('/logout', logoutRoute);
 app.use('/my-listings', myListingsRoutes);
 app.use('/messages', messagesRoutes);
+app.use('/search', searchRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
