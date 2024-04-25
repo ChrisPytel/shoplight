@@ -15,27 +15,71 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/my-listings.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"/>
+
+  <!-- Pre-installed CSS -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/footer.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
 </head>
 
 <body>
+  <%- include('partials/_header') %>
 
+  <!-- "Storefront" banner -->
+  <section class="banner">
+    <div>
+      <!-- Maybe add a photo here, either zombie or stretch option to upload when registering -->
+      <img src="">
+    </div>
+    <br>
+    <div>
+      <h2>Welcome to my store!</h2>
+    </div>
+  </section>
 
-  <h1>   This is the page for adding/modifying listings 📖  </h1>
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
+  <!-- All listings here -->
+  <main>
+    <section class="new listing">
+      <!-- Form for new listing -->
+      <!-- question: needs action / -->
+      <form method="post" action="" class="new-listing">
+        <label for="name"></label>
+        <input name="name-input" id="name-input" style="overflow:hidden" placeholder="Name of product"></textarea>
+        <label for="description"></label>
+        <textarea name="description-input" id="description-input" style="overflow:hidden" placeholder="Product description"></textarea>
+        <label for="price"></label>
+        <input name="price-input" id="price-input" style="overflow:hidden" placeholder="Price"></textarea>
+        <label for="image url"></label>
+        <input name="image-input" id="image-input" style="overflow:hidden" placeholder="Image URL"></textarea>
+          <button type="submit" class="submit-listing">Create</button>
+      </form>
+    </section>
+    <section class="listings">
+        <!-- show from SQL -->
+    </section>
+  </main>
+<%- include('partials/_footer.ejs') %>
 
 </body>
 
