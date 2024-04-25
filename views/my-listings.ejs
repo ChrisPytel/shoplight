@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="/styles/header.css" />
   <link rel="stylesheet" href="/styles/index.css" />
   <link rel="stylesheet" href="/styles/footer.css" />
+  <link rel="stylesheet" href="/styles/my-listings.css" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,17 +54,15 @@
       <img src="">
     </div>
     <br>
-    <div>
-      <h2>Welcome to my store!</h2>
-    </div>
   </section>
 
   <!-- All listings here -->
   <main>
-    <section class="new listing">
+    <section class="new-listing">
+      <h2>Create a new listing:</h2>
       <!-- Form for new listing -->
       <!-- question: needs action / -->
-      <form method="post" action="" class="new-listing">
+      <form method="post" action="/api/my-listings" class="new-listing">
         <label for="name"></label>
         <input name="name-input" id="name-input" style="overflow:hidden" placeholder="Name of product"></textarea>
         <label for="description"></label>
@@ -75,8 +74,10 @@
           <button type="submit" class="submit-listing">Create</button>
       </form>
     </section>
+    <br>
     <section class="listings">
-        <!-- show from SQL -->
+      <h2>My listings:</h2> 
+      Show from SQL
     </section>
   </main>
 <%- include('partials/_footer.ejs') %>
