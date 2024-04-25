@@ -81,7 +81,12 @@
     <!-- All existing listings here -->
     <section class="listings">
       <h1>My listings:</h1> 
-      Show from SQL
+      <% for (let listing of listings) { %>
+        <div>
+          <%=listing.name %>
+          <!-- use HTML to add images, etc from listing -->
+        </div>
+      <% } %>
     </section>
   </main>
 <%- include('partials/_footer.ejs') %>
