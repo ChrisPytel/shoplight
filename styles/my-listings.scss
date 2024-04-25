@@ -1,14 +1,21 @@
 @import 'colors';
 
+main {
+  margin-top: 70px;
+}
+
 .new-listing {
-  width: 90vw;
+  width: 50vw;
   height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 h1 {
   font: 600 3rem "Syne", sans-serif;
+}
+
+input, textarea {
+  border-radius: 5px;
 }
