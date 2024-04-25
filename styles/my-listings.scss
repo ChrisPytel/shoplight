@@ -1,12 +1,14 @@
+@import 'colors';
+
 .new-listing {
   width: 90vw;
-  height: 70vh;
+  height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin-top: 100px;
 }
 
-h2 {
-  font: 600 7rem "Syne", sans-serif;
+h1 {
+  font: 600 3rem "Syne", sans-serif;
 }
