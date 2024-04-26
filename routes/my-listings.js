@@ -10,11 +10,19 @@ const router = express.Router();
 
 const db = require('../db/connection');
 
+const cookieSession = require('cookie-session');
+router.use(cookieSession({
+  name: 'session',
+  keys: ['superSecretKey', 'superSecretKey2'], /* secret keys */
+  maxAge: 24 * 60 * 60 * 1000 // Cookie Options (24 hours)
+}));
+
 //Renders the my-listings page
 router.get('/', (req, res) => {
   // console.log("GET my-listings entered");
   return db
-    .query(`SELECT * FROM products;`)  //replace this query with one that will retreieve only products that match user_in of person logged in                                                                            //note: we need to know what object is being given here in order to add each value
+    .query(`SELECT * FROM products WHERE user_id = $1;`,
+  [req.session.user_id])  //replace this query with one that will retreieve only products that match user_in of person logged in                                                                            //note: we need to know what object is being given here in order to add each value
     .then((products) => {
       const templateVars = {
         listings: products.rows
