@@ -32,17 +32,6 @@ router.get('/', (req, res) => {
 //Handles any post requests on my-listings
 router.post("/", (req, res) => {
   console.log(req.body);
-  // look at body parser
-  // change names from db on form
-  // before send to db, check that the data type is correct. AJAX -> better protected, change data before hits backend
-  /* validation: after getting req.body, check on the stuff
-  call another function in another file to check on ALL of the pieces
-
-  could check if key:value all match and exist 
-  can disable button until edge case is met -> all the fields are filled
-  or as soon as hit button, validate, and show error message like tweeter 
-  e.g. check if type is number, then throw error if not 
-   */
   // req.session.user_id = "add code here to take login info from cookies"
   return db
     .query(`INSERT INTO products (user_id, name, description, photo_url, price) 
