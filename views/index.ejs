@@ -47,32 +47,7 @@
     <h1>Featured</h1>
 
     <div class="featured-products">
-
-      <div class="product-container">
-        <div class="product-image" style="background-image:url(https://placehold.co/350x350)"></div>
-        <div class="product-box">
-          <div class="product-name">product name</div>
-          <div class="product-price">17.99</div>
-          <div class="product-description">Here is a description with more words and some more words and some more words wow.</div>
-          <div class="product-icons">
-            <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
-            <div class="message-seller">
-              <a href="/messages">
-                <i class="fa-regular fa-envelope"></i>
-                <i class="fa-solid fa-envelope"></i>
-              </a>
-            </div>
-            <div class="add-favorite">
-              <form action="/add-to-favorites" method="post">
-                <button type="submit">
-                  <i class="fa-regular fa-heart"></i>
-                  <i class="fa-solid fa-heart"></i>
-                </button>
-              </div>
-          </div>
-        </div>
-      </div>
-
+      <div class="featured-product-listings-container"></div>
     </div>
   </section>
 
@@ -87,6 +62,34 @@
         Dropdown here
       </div>
     </section>
+
+    <div class="product-listings-container"></div>
+
+    <div class="product-container">
+      <div class="product-image" style="background-image:url(https://placehold.co/350x350)"></div>
+      <div class="product-box">
+        <div class="product-name">product name</div>
+        <div class="product-price">17.99</div>
+        <div class="product-description">Here is a description with more words and some more words and some more words wow.</div>
+        <div class="product-icons">
+          <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="message-seller">
+            <a href="/messages">
+              <i class="fa-regular fa-envelope"></i>
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          </div>
+          <div class="add-favorite">
+            <form action="/add-to-favorites" method="post">
+              <button type="submit">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-heart"></i>
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+    
   </section>
 
   <%- include('partials/_footer.ejs') %>
