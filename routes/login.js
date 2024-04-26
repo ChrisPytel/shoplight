@@ -7,10 +7,10 @@
 
 //internal libraries from Tinyapp
 const helper = require('../resources/functions');
-const database = require('../resources/databases');     //js
 
 const express = require('express');
 const router  = express.Router();
+const query = require('../db/queries/getEmailPassword');
 
 
 //Renders the login page with some users
@@ -19,26 +19,32 @@ router.get('/', (req, res) => {
   res.render('login');
 }); 
 
-
 //Handles the request after pressing the LOGIN button
 router.post("/", (req, res) => {
   console.log("POST login entered");
-  const loginEmail = req.body.email;
-  const loginPassword = req.body.password;
-  console.log(`Our loginEmail is: `, loginEmail);
-  console.log(`Our loginPassword is: `, loginPassword);       
+  const formEmail = req.body.email;
+  const formPassword = req.body.password;
+  console.log(`01- Our formSubmissionEmail is: ${formEmail} and password: ${formPassword}`);
+
+  const queryPromise = query.getEmailPassword(formEmail, formPassword);  //performs a sql query to check our database, returns a promise
+  queryPromise.then(queryReturn =>{   
+
+    // const verifyLogin = helper.checkLoginCredentials(formEmail, formPassword, queryReturn);
+    // if (verifyLogin.verified === true) {
+    //   req.session.user_id = verifyLogin.id;
+    //   res.redirect('/');
+    // } else if (verifyLogin.verified === false) {
+    //   return res.status(400).send("Invalid login credentials, please try again.");
+    // }
+  })
 });
-
-
-
-
 
 module.exports = router;
 
-
+//Check lightbnb for backend code
+//Andy's suggestion was this on the kickoff demo, returning the router
 
 // module.exports = (db) =>{
-
 //   router.get("/login", (req, res) => {
 //       db.query(`select * from users;`)
 //         .then(data => {
@@ -51,28 +57,4 @@ module.exports = router;
 //         });
 //       });
 //     return router;
-
 // };
-
-
-//check lightbbn for backend code
-
-
-
-
-
-
-
-
-
-
-
-// router.get("/login", (req, res) => {
-    
-//   res.render("login");  
-// });
-
-
-
-
-
