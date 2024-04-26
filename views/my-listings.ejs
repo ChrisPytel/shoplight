@@ -83,8 +83,9 @@
       <h1>My listings:</h1> 
       <% for (let listing of listings) { %>
         <div>
-          <%=listing.name %>
-          <!-- use HTML to add images, etc from listing -->
+          <%=listing.name%> 
+          <%=listing.description%>
+          <img src=<%= listing.photo_url %>
         </div>
       <% } %>
     </section>
