@@ -61,18 +61,19 @@
     <section class="new-listing-section">
       <h1>Create a new listing:</h1>
       <!-- Form for new listing -->
+      <!-- TO DO: rename the name of form inputs to be same as ones from table -->
       <form method="post" action="/my-listings" class="new-listing-form">
         <label for="name">Product name:</label>
-        <input name="name-input" id="name-input" style="overflow:hidden" placeholder="Name of product"></textarea>
+        <input name="name" id="name" style="overflow:hidden" placeholder="Name of product"></textarea>
         <br>
         <label for="description">Product description:</label>
-        <textarea name="description-input" id="description-input" style="overflow:hidden" placeholder="Product description"></textarea>
+        <textarea name="description" id="description" style="overflow:hidden" placeholder="Product description"></textarea>
         <br>
         <label for="price">Price ($):</label>
-        <input name="price-input" id="price-input" style="overflow:hidden" placeholder="Price"></textarea>
+        <input name="price" id="price" type="number" style="overflow:hidden" placeholder="Price"></textarea>
         <br>
-        <label for="image url">Please attach an image URL:</label>
-        <input name="image-input" id="image-input" style="overflow:hidden" placeholder="Image URL"></textarea>
+        <label for="photo url">Please attach an image URL:</label>
+        <input name="photo_url" id="photo_url" style="overflow:hidden" placeholder="Image URL"></textarea>
         <br>
         <button type="submit" class="submit-listing">Create</button>
       </form>
