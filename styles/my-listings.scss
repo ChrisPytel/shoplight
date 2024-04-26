@@ -2,13 +2,24 @@
 
 main {
   margin-top: 70px;
-}
-
-.new-listing {
-  width: 50vw;
-  height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.new-listing-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.new-listing-form {
+  width: 50vw;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 10px;
 }
 
@@ -18,4 +29,19 @@ h1 {
 
 input, textarea {
   border-radius: 5px;
+}
+
+textarea {
+  height: 150px;
+}
+
+.listing-image{
+  height: 300px;
+  width: 300px;
+}
+
+.listing {
+  height: 500px;
+  width: 1000px;
+  display: flex;
 }
