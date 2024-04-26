@@ -7,6 +7,6 @@ CREATE TABLE products (
   photo_url VARCHAR(255) NOT NULL,
   price INTEGER NOT NULL,
   is_featured BOOLEAN,
-  is_available BOOLEAN,
+  is_available BOOLEAN default TRUE,
   date_posted TIMESTAMP default CURRENT_TIMESTAMP
 );
