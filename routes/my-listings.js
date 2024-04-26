@@ -43,10 +43,11 @@ router.post("/", (req, res) => {
   or as soon as hit button, validate, and show error message like tweeter 
   e.g. check if type is number, then throw error if not 
    */
+  req.session.user_id = "add code here to take login info from cookies"
   return db
     .query(`INSERT INTO products (user_id, name, description, photo_url, price, is_featured, is_available) 
 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
-      [req.body.user_id, req.body.name, req.body.description, req.body.photo_url, req.body.price, req.body.is_featured, req.body.is_available])
+      [req.session.user_id, req.body.name, req.body.description, req.body.photo_url, req.body.price])
     .then((products) => {
       const templateVars = {
         listings: products.rows
