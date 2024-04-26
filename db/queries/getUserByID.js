@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 const getUserByID = (id) => {
-  console.log(`Our id is: `, id);
+  // console.log(`Our id is: `, id);
   let queryString =`
   SELECT name
   FROM users
@@ -9,7 +9,7 @@ const getUserByID = (id) => {
   return db.query(queryString,[id])
     .then(data => {
       console.log(`Our DB returned: `, data.rows);
-      return data.rows;
+      return data.rows[0].name; //returns the name corresponding the ID number of the stored cookie
     })
     .catch(err => {
       console.log(`Got an error during getUserByID query:\n`, err);

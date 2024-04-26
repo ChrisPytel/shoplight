@@ -5,13 +5,12 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-//internal libraries from Tinyapp
-const helper = require('../resources/functions');
-
 const express = require('express');
 const router  = express.Router();
-const query = require('../db/queries/getEmailPassword');
+const queryLogin = require('../db/queries/getEmailPassword');
+const queryUser = require('../db/queries/getUserByID');
 
+const fn = require('../resources/functions');
 
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
@@ -24,7 +23,23 @@ router.use(cookieSession({
 //Renders the login page with some users
 router.get('/', (req, res) => {
   console.log("GET Login entered");
-  res.render('login');
+  const cookieStored = req.session.user_id;
+  console.log(`Our cookieStored is: `, cookieStored);
+
+  const queryPromise = queryUser.getUserByID(cookieStored);
+  queryPromise
+  .then((result) => {
+  console.log('Name for signed in user:', result);
+  const templateVars ={
+    cookieStored,                   //Effectively a bool, representing if a cookie is set
+    displayName: result
+  };
+  res.render('login', templateVars);
+  })
+  .catch(err =>{
+    console.log('Got an error, couldnt fetch Username for stored cookieID', err);
+    res.render('login');
+  })  
 }); 
 
 //Handles the request after pressing the LOGIN button
@@ -34,19 +49,22 @@ router.post("/", (req, res) => {
   const formPassword = req.body.password;
   console.log(`01- Our formSubmissionEmail is: ${formEmail} and password: ${formPassword}`);
 
-  const queryPromise = query.getEmailPassword(formEmail, formPassword);  //performs a sql query to check our database, returns a promise
-  console.log(`Our queryPromise is: `, queryPromise);
-  queryPromise.then(queryReturn =>{   
+  const queryPromise = queryLogin.getEmailPassword(formEmail, formPassword);  //performs a sql query to check our database, returns a promise
 
-    const verifyLogin = helper.checkLoginCredentials(formEmail, formPassword, queryReturn);
+  queryPromise
+  .then(queryReturn =>{   
+    const verifyLogin = fn.checkLoginCredentials(formEmail, formPassword, queryReturn); //gets the return value from authentication
     if (verifyLogin.verified === true) {
-      console.log("Wow we got it!");
-      req.session.user_id = verifyLogin.id;
+      req.session.user_id = verifyLogin.id; //sets the cookie based on the ID number from the database user
+      console.log("07- Sucessfully signed in and cookie created! Cookie value:", req.session.user_id); 
       res.redirect('/');
     } else if (verifyLogin.verified === false) {
       return res.status(400).send("Invalid login credentials, please try again.");
     }
   })
+  .catch((err) => {
+    console.error('Promise Rejected:', err.message);
+    })
 });
 
 module.exports = router;
