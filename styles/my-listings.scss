@@ -46,8 +46,9 @@ textarea {
 //   display: flex;
 // }
 
-.listings-grid {
-  display: grid;
+.product-listings-container {
+  display: flex;
+  flex-direction: row;
 }
 
 /* Product container styling */
