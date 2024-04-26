@@ -12,7 +12,6 @@
 
 .index-featured, .index-listings {
   width: 100vw;
-  height: calc(100vh - 100px);
   box-sizing: border-box;
   padding: 60px 120px;
 }
@@ -22,7 +21,7 @@
 .product-container {
   box-sizing: border-box;
   width: calc(40vw + 2px);
-  max-width: 500px;
+  max-width: 502px;
   background-color: $primary-color;
   border: 1px solid $border-color;
 }
