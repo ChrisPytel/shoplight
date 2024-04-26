@@ -13,6 +13,14 @@ const router  = express.Router();
 const query = require('../db/queries/getEmailPassword');
 
 
+const cookieSession = require('cookie-session');
+router.use(cookieSession({
+  name: 'session',
+  keys: ['superSecretKey', 'superSecretKey2'], /* secret keys */
+  maxAge: 24 * 60 * 60 * 1000 // Cookie Options (24 hours)
+}));
+
+
 //Renders the login page with some users
 router.get('/', (req, res) => {
   console.log("GET Login entered");
@@ -27,15 +35,17 @@ router.post("/", (req, res) => {
   console.log(`01- Our formSubmissionEmail is: ${formEmail} and password: ${formPassword}`);
 
   const queryPromise = query.getEmailPassword(formEmail, formPassword);  //performs a sql query to check our database, returns a promise
+  console.log(`Our queryPromise is: `, queryPromise);
   queryPromise.then(queryReturn =>{   
 
-    // const verifyLogin = helper.checkLoginCredentials(formEmail, formPassword, queryReturn);
-    // if (verifyLogin.verified === true) {
-    //   req.session.user_id = verifyLogin.id;
-    //   res.redirect('/');
-    // } else if (verifyLogin.verified === false) {
-    //   return res.status(400).send("Invalid login credentials, please try again.");
-    // }
+    const verifyLogin = helper.checkLoginCredentials(formEmail, formPassword, queryReturn);
+    if (verifyLogin.verified === true) {
+      console.log("Wow we got it!");
+      req.session.user_id = verifyLogin.id;
+      res.redirect('/');
+    } else if (verifyLogin.verified === false) {
+      return res.status(400).send("Invalid login credentials, please try again.");
+    }
   })
 });
 
