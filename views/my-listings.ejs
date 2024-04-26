@@ -58,10 +58,10 @@
 
   
   <main>
-    <section>
+    <section class="new-listing-section">
       <h1>Create a new listing:</h1>
       <!-- Form for new listing -->
-      <form method="post" action="/my-listings" class="new-listing">
+      <form method="post" action="/my-listings" class="new-listing-form">
         <label for="name">Product name:</label>
         <input name="name-input" id="name-input" style="overflow:hidden" placeholder="Name of product"></textarea>
         <br>
@@ -82,10 +82,10 @@
     <section class="listings">
       <h1>My listings:</h1> 
       <% for (let listing of listings) { %>
-        <div>
+        <div class="listing">
           <%=listing.name%> 
           <%=listing.description%>
-          <img src=<%= listing.photo_url %>
+          <img src=<%= listing.photo_url %> class="listing-image">
         </div>
       <% } %>
     </section>
