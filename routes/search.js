@@ -1,12 +1,7 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into /users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
+const db = require('../db/queries/products');
+const queryUser = require('../db/queries/getUserByID');
 
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
@@ -15,16 +10,25 @@ router.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // Cookie Options (24 hours)
 }));
 
-//Renders the search page
-router.get("/", (req, res) => {
-  res.render("search");
+router.get('/', (req, res) => {
+  const cookieStored = req.session.user_id;
+  const displayNamePromise = queryUser.getUserByID(cookieStored);   // Retrieve displayName asynchronously
+  const productsPromise = db.getProducts();                         // Retrieve products
+
+  Promise.all([displayNamePromise, productsPromise])                // Execute both promises concurrently using Promise.all
+      .then(([displayName, products]) => {
+          const templateVars = {
+              cookieStored,
+              displayName,
+              listings: products
+          };
+          return res.render('search.ejs', templateVars);
+      })
+      .catch((error) => {
+          console.error('Error fetching data:', error);
+          res.status(500).send('Internal Server Error');
+      });
 });
-
-//Handles the request after pressing search button
-/* router.post("/", (req, res) => {
-  //code goes here  
-
-}); */
 
 
 module.exports = router;
