@@ -19,15 +19,13 @@ router.use(cookieSession({
 
 //Renders the my-listings page
 router.get('/', (req, res) => {
-  // console.log("GET my-listings entered");
   return db
     .query(`SELECT * FROM products WHERE user_id = $1;`,
-  [req.session.user_id])  //replace this query with one that will retreieve only products that match user_in of person logged in                                                                            //note: we need to know what object is being given here in order to add each value
+  [req.session.user_id])
     .then((products) => {
       const templateVars = {
         listings: products.rows
       };
-      // console.log(templateVars);
       return res.render('my-listings', templateVars);
     })
     .catch((err) => {
@@ -40,7 +38,6 @@ router.get('/', (req, res) => {
 //Handles any post requests on my-listings
 router.post("/", (req, res) => {
   console.log(req.body);
-  // req.session.user_id = "add code here to take login info from cookies"
   return db
     .query(`INSERT INTO products (user_id, name, description, photo_url, price) 
 VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
