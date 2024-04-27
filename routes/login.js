@@ -26,20 +26,27 @@ router.get('/', (req, res) => {
   const cookieStored = req.session.user_id;
   console.log(`Our cookieStored is: `, cookieStored);
 
-  const queryPromise = queryUser.getUserByID(cookieStored);
-  queryPromise
-  .then((result) => {
-  console.log('Name for signed in user:', result);
-  const templateVars ={
-    cookieStored,                   //Effectively a bool, representing if a cookie is set
-    displayName: result
-  };
-  res.render('login', templateVars);
-  })
-  .catch(err =>{
-    console.log('Got an error, couldnt fetch Username for stored cookieID', err);
-    res.render('login');
-  })  
+  if (cookieStored){
+    const queryPromise = queryUser.getUserByID(cookieStored);
+    queryPromise
+    .then((result) => {
+    console.log('Name for signed in user:', result);
+    const templateVars ={
+      cookieStored,                   //Effectively a bool, representing if a cookie is set
+      displayName: result
+    };
+    res.render('login', templateVars);
+    })
+    .catch(err =>{
+      console.log('Got an error, couldnt fetch Username for stored cookieID', err);
+      res.render('login');
+    })  
+  }else{ //If no cookie is stored, render page without username
+    const templateVars ={
+      cookieStored            //Effectively a bool, representing if a cookie is set
+    };
+    res.render('login', templateVars);
+  }
 }); 
 
 //Handles the request after pressing the LOGIN button
