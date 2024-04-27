@@ -38,6 +38,15 @@ const logoutRoute = require('./routes/logout');
 const myListingsRoutes = require('./routes/my-listings');
 const messagesRoutes = require('./routes/messages');
 const searchRoutes = require('./routes/search');
+const productRoutes = require('./routes/products-api');
+
+// Cookies
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['superSecretKey', 'superSecretKey2'], /* secret keys */
+  maxAge: 24 * 60 * 60 * 1000 // Cookie Options (24 hours)
+}));
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,6 +61,7 @@ app.use('/logout', logoutRoute);
 app.use('/my-listings', myListingsRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/search', searchRoutes);
+app.use('/products', productRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -60,13 +70,12 @@ app.use('/search', searchRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
-});
-
-
-
-app.get('/', (req, res) => {
-  res.render('index');
+  const cookieStored = req.session.user_id;
+  const templateVars = {
+    cookieStored
+  };
+  res.redirect('/products');
+  res.render('index', templateVars);
 });
 
 
@@ -74,8 +83,6 @@ app.get('/', (req, res) => {
 app.get('/my-listings', (req, res) => {
   res.render('my-listings');
 });
-
-
 
 
 
