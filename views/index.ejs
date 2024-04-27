@@ -48,14 +48,43 @@
     <h1>Featured</h1>
 
     <div class="featured-products">
-      <div class="featured-product-listings-container"></div>
+      <div class="featured-product-listings-container">
+        <% for (let featured of listings) { %>
+          <% if (featured.is_featured === true) { %>
+            <div class="product-container">
+              <div class="product-image" style="background-image:url('<%= featured.photo_url %>')"></div>
+              <div class="product-box">
+                <div class="product-name"><%= featured.name %></div>
+                <div class="product-price"><%= featured.price %></div>
+                <div class="product-description"><%= featured.description %></div>
+                <div class="product-icons">
+                  <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
+                  <div class="message-seller">
+                    <a href="/messages">
+                      <i class="fa-regular fa-envelope"></i>
+                      <i class="fa-solid fa-envelope"></i>
+                    </a>
+                  </div>
+                  <div class="add-favorite">
+                    <form action="/add-to-favorites" method="post">
+                      <button type="submit">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
     </div>
   </section>
 
   <section class="index-listings">
     <section class="index-listings-top">
       <div class="index-listings-top-title">
-        <h1>Products</h1>
+        <h1>All products</h1>
       </div>
 
       <div class="index-listings-top-filter">
