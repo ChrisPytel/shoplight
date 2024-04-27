@@ -33,6 +33,7 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <script defer src="/routes/products-api.js"></script>
   <script src="https://kit.fontawesome.com/0b658c0bbb.js" crossorigin="anonymous"></script>
 </head>
 
@@ -47,17 +48,7 @@
     <h1>Featured</h1>
 
     <div class="featured-products">
-
-      <div class="product-container">
-        <div class="product-image" style="background:url(https://placehold.co/120x32)"></div>
-        <div class="product-name">product name</div>
-        <div class="product-price">17.99</div>
-        <div class="product-description"></div>
-        <div class="product-icons">
-          <div class="product-in-stock"></div>
-        </div>
-      </div>
-
+      <div class="featured-product-listings-container"></div>
     </div>
   </section>
 
@@ -68,10 +59,40 @@
       </div>
 
       <div class="index-listings-top-filter">
-        Filter by:
+        Sort by:
         Dropdown here
       </div>
     </section>
+
+    <div class="product-listings-container">
+      <% for (let listing of listings) { %>
+      <div class="product-container">
+        <div class="product-image" style="background-image:url(<%= listing.photo_url %>)"></div>
+        <div class="product-box">
+          <div class="product-name"><%= listing.name %></div>
+          <div class="product-price"><%= listing.price %></div>
+          <div class="product-description"><%= listing.description %></div>
+          <div class="product-icons">
+            <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="message-seller">
+              <a href="/messages">
+                <i class="fa-regular fa-envelope"></i>
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+            </div>
+            <div class="add-favorite">
+              <form action="/add-to-favorites" method="post">
+                <button type="submit">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-solid fa-heart"></i>
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
   </section>
 
   <%- include('partials/_footer.ejs') %>

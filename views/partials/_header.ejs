@@ -7,16 +7,22 @@
     <div class="nav-right">
       <a class="nav-link" href="/search">Search</a>
 
+      <% if (!cookieStored) { %>    <!-- If user cookie isnt stored as a logged in account, display options -->
         <a class="nav-link" href="/my-listings">My Listings</a>
         <a class="nav-link" href="/messages">Messages</a>
 
-        logged in as: blah
+        Logged in as: <%= displayName %>
         <form method="POST" action="/logout">
           <button type="submit">Log out</button>
         </form>
 
+      <% } else{ %>    <!-- If user is logged in with a cookie stored, display username and button for logout -->
+
         <a class="nav-item" href ="/login">Login</a>
         <a class="nav-item" href ="/register">Register</a>
+
+      <% } %>
+
 
     </div>
   </nav>
