@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db/queries/products');
+const queryUser = require('../db/queries/getUserByID');
 
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
@@ -10,16 +11,25 @@ router.use(cookieSession({
 }));
 
 router.get('/', (req, res) => {
+  const cookieStored = req.session.user_id;
+  const displayNamePromise = queryUser.getUserByID(cookieStored);   // Retrieve displayName asynchronously
+  const productsPromise = db.getProducts();                         // Retrieve products
 
-  return db.getProducts()
-  .then((products) => {
-        const templateVars = {
-        listings: products
-        // put call here for featured
-      };
-      console.log(products);
-      return res.render('index.ejs', templateVars);
-  })
+  Promise.all([displayNamePromise, productsPromise])                // Execute both promises concurrently using Promise.all
+      .then(([displayName, products]) => {
+          const templateVars = {
+              cookieStored,
+              displayName,
+              listings: products
+              // Put call here for featured
+          };
+          return res.render('index.ejs', templateVars);
+      })
+      .catch((error) => {
+          console.error('Error fetching data:', error);
+          res.status(500).send('Internal Server Error');
+      });
 });
+
 
 module.exports = router;

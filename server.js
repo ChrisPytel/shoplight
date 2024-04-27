@@ -81,7 +81,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/my-listings', (req, res) => {
-  res.render('my-listings');
+  res.render('my-listings', templateVars);
 });
 
 
