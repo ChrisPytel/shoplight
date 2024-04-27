@@ -55,7 +55,7 @@
     <div class="favourite-listings-container">
       <% for (let listing of listings) { %>
       <div class="product-container">
-        <div class="product-image"> </div><%= listing.photo_url %></div>
+        <div class="product-image"> </div><img src="<%= listing.photo_url %>"></div>
         <div class="product-box">
           <div class="product-name"><%= listing.name %></div>
           <div class="product-price"><%= listing.price %></div>
@@ -71,3 +71,4 @@
 </body>
 
 </html>
+
