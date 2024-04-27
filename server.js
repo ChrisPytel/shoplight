@@ -38,6 +38,7 @@ const logoutRoute = require('./routes/logout');
 const myListingsRoutes = require('./routes/my-listings');
 const messagesRoutes = require('./routes/messages');
 const searchRoutes = require('./routes/search');
+const favouritesRoutes = require('./routes/favourites');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,6 +53,7 @@ app.use('/logout', logoutRoute);
 app.use('/my-listings', myListingsRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/search', searchRoutes);
+app.use('/favourites', favouritesRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
