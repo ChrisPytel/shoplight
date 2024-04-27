@@ -120,3 +120,20 @@
   display: none;
 }
 
+
+/* Responsive design for phone */
+@media only screen and (max-width: 420px) {
+  /* Write smartphone only styles here */
+}
+
+/* Responsive design for tablet */
+
+@media only screen and (max-width: 1024px) {
+  .index-featured, .index-listings {
+    padding: 60px;
+  }
+
+  .product-listings-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
