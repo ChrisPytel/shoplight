@@ -12,7 +12,6 @@ const db = require('../db/connection');
 const myListingsFn = require('../db/queries/getMyListings');
 const addNewListingFn = require('../db/queries/addNewListing');
 const queryUser = require('../db/queries/getUserByID');
-addNewListingFn
 
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
