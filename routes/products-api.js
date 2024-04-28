@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
           const templateVars = {
               cookieStored,
               displayName,
-              listings: products
-              // Put call here for featured
+              listings: products,
+              featured: products.is_featured
           };
           return res.render('index.ejs', templateVars);
       })
