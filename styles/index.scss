@@ -81,6 +81,7 @@
   justify-content: flex-end;
   column-gap: 15px;
   font-size: 1.35rem;
+  align-self: end;
 }
 
 .message-seller a {
@@ -118,6 +119,22 @@
 
 .add-favorite button:hover .fa-regular {
   display: none;
+}
+
+.featured-product-listings-container {
+  width: calc(100vw - 240px);
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 60px;
+}
+
+.featured-product-listings-container > .product-container {
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 
