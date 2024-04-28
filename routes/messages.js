@@ -7,6 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
+const queryUser = require('../db/queries/getUserByID');
 
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
@@ -18,8 +19,27 @@ router.use(cookieSession({
 //Renders the messages page
 router.get('/', (req, res) => {  
   console.log("GET messages entered");
+  const cookieStored = req.session.user_id;
+  console.log(`Our cookieStored is: `, cookieStored);
 
-  res.render('messages');
+  if (cookieStored){
+    const queryPromise = queryUser.getUserByID(cookieStored);
+    queryPromise
+    .then((result) => {
+    console.log('Name for signed in user:', result);
+    const templateVars ={
+      cookieStored,                   //Effectively a bool, representing if a cookie is set
+      displayName: result
+    };
+    res.render('messages', templateVars);
+    })
+    .catch(err =>{
+      console.log('Got an error, couldnt fetch Username for stored cookieID', err);
+      res.render('messages');
+    })  
+  }else{ //If no cookie is stored, redirect to home page
+    res.render('index');
+  }
 }); 
 
 

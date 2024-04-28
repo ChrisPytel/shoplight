@@ -1,0 +1,79 @@
+@import 'colors';
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgb(235, 184, 88) 0%,
+    rgb(219, 190, 163) 20%,
+    rgb(219, 178, 163) 34%,
+    rgb(235, 178, 201) 59%,
+    rgb(244, 211, 162) 74%,
+    rgb(255, 194, 153) 100%
+  );
+}
+
+h1 {
+  font: 600 3rem "Syne", sans-serif;
+  color: $accent-color;
+}
+
+.wrapper{
+  width: 90%;
+}
+
+.incoming{
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+  border: 3px dashed fuchsia;
+}
+
+h1{
+  display: flex;
+  justify-content: center;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
+}
+
+.inbox-container{
+  width: 55%;  
+
+  border: 3px dashed blueviolet;
+}
+
+.inbox{ 
+  height: 350px;
+  width: 37%;
+  background-color: rgb(255, 247, 236);
+  width: 100%;
+  border-radius: 1em;
+
+  border: 3px dashed limegreen;
+}
+
+.message-container{
+  height: 485px;
+  width: 40%;
+  background-color: rgb(255, 247, 236);
+  border-radius: 1em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
+  
+  border: 3px dashed orangered;
+}
+
+.drawing-space{
+  height: 90%;
+  width: 90%;
+
+  border: 3px dashed blue;
+}
