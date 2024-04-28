@@ -7,7 +7,7 @@ const getMessagesByID = (id) => {
   FROM messages
   LEFT JOIN users ON messages.user_id_from = users.id
   LEFT JOIN products ON messages.product_id = products.id
-  WHERE id = $1;`;
+  WHERE user_id_to = $1;`;
   return db.query(queryString,[id])
     .then(data => {
       console.log(`Our DB returned: `, data.rows);
