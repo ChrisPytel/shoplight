@@ -26,6 +26,18 @@ app.use(
 );
 app.use(express.static('public'));
 
+// Cookies
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['superSecretKey', 'superSecretKey2'], /* secret keys */
+  maxAge: 24 * 60 * 60 * 1000 // Cookie Options (24 hours)
+}));
+
+// Functions & queries
+const queryUser = require('./db/queries/getUserByID.js');
+const fn = require('./resources/functions');
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
@@ -61,10 +73,30 @@ app.use('/favourites', favouritesRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// app.get('/', (req, res) => {
+  // const cookieStored = req.session.user_id;
+  // // const templateVars = {
+  // //   cookieStored
+  // //   // add query to give templateVars listings here
+  // // }
+  // // res.render('index', templateVars);
 
+
+  // const queryPromise = queryUser.getUserByID(cookieStored);
+  // queryPromise
+  // .then((result) => {
+  // console.log('Name for signed in user:', result);
+  // const templateVars ={
+  //   cookieStored,                   //Effectively a bool, representing if a cookie is set
+  //   displayName: result
+  // };
+  // res.render('index', templateVars);
+  // })
+  // .catch(err =>{
+  //   console.log('Got an error, couldnt fetch Username for stored cookieID', err);
+  //   res.render('index');
+  // })  
+// });
 
 
 app.get('/', (req, res) => {
