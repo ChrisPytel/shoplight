@@ -10,30 +10,47 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/messages.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
 
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/messages.js"></script>
+  <script src="/vendor/jquery-3.0.0.js"></script ipt>
+  <!-- <script type="text/javascript" src="./scripts/messages.js"></script> -->
+  <script defer src="./scripts/messages.js"></script>
 </head>
 
 <body>
+  <%- include('partials/_header') %>
 
-  <h1>   This is the page for checking your messages from other users!💬</h1>
-
-
-
-
-
-
+<div class="wrapper">
   
-
-
-
-
-
-
-
+    <section class="incoming">      
+      <div class = "inbox-container">
+        <h1>Message Inbox  💬</h1>  
+        <div class="inbox"> 
+          <!-- Inbox items are appended here -->        
+        </div>
+      </div>
+      <div class = "message-container"> 
+        <div class="drawing-space">          
+          <!-- Contents of a message are drawn here -->
+        </div>
+<!--         <div class="reply-button">
+          <p>Reply</p>
+        </div> -->
+      </div>    
+    </section>
+  
+    <!--  Stretch: allow for option to reply
+  
+      <section class= "outbound">
+        <h3>Replying to: </h3>
+        <div class ="reply-container">        
+        </div>      
+      </section>  
+  
+     -->
+  
+</div>
 
 
 </body>
