@@ -39,6 +39,7 @@ const myListingsRoutes = require('./routes/my-listings');
 const messagesRoutes = require('./routes/messages');
 const searchRoutes = require('./routes/search');
 const productRoutes = require('./routes/products-api');
+const favouritesRoutes = require('./routes/favourites');
 
 // Cookies
 const cookieSession = require('cookie-session');
@@ -62,6 +63,7 @@ app.use('/my-listings', myListingsRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/search', searchRoutes);
 app.use('/products', productRoutes);
+app.use('/favourites', favouritesRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
