@@ -9,6 +9,10 @@ const express = require('express');
 const router = express.Router();
 
 const db = require('../db/connection');
+const myListingsFn = require('../db/queries/getMyListings');
+const addNewListingFn = require('../db/queries/addNewListing');
+const queryUser = require('../db/queries/getUserByID');
+addNewListingFn
 
 const cookieSession = require('cookie-session');
 router.use(cookieSession({
@@ -19,32 +23,40 @@ router.use(cookieSession({
 
 //Renders the my-listings page
 router.get('/', (req, res) => {
-  return db
-    .query(`SELECT * FROM products WHERE user_id = $1;`,
-  [req.session.user_id])
-    .then((products) => {
-      const templateVars = {
-        listings: products.rows
-      };
-      return res.render('my-listings', templateVars);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  const cookieStored = req.session.user_id;
+  const displayNamePromise = queryUser.getUserByID(cookieStored);
+  const myListingsProducts = myListingsFn.getMyListings(cookieStored);
 
+  Promise.all([displayNamePromise, myListingsProducts])
+    .then(([displayName, products]) => {
+      const templateVars = {
+        cookieStored,
+        displayName,
+        listings: products,
+      };
+      return res.render('my-listings.ejs', templateVars);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
 
 
 //Handles any post requests on my-listings
 router.post("/", (req, res) => {
+  const cookieStored = req.session.user_id;
+  const displayNamePromise = queryUser.getUserByID(cookieStored);
+  const myListingsProducts = myListingsFn.getMyListings(cookieStored);
+  const newListing = addNewListingFn.addNewListing(cookieStored, req.body.name, req.body.description, req.body.photo_url, req.body.price);
+
   console.log(req.body);
-  return db
-    .query(`INSERT INTO products (user_id, name, description, photo_url, price) 
-VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-      [1, req.body.name, req.body.description, req.body.photo_url, req.body.price])
-    .then((products) => {
+  Promise.all([displayNamePromise, myListingsProducts, newListing])
+      .then(([displayName, products]) => {
       const templateVars = {
-        listings: products.rows
+        cookieStored,
+        displayName,
+        listings: products,
       };
       // console.log(templateVars);
       return res.render('my-listings', templateVars);
@@ -53,10 +65,6 @@ VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
       console.log(err.message);
     });
 });
-
-// const templateVars = { }; //update this line with the new db
-// return res.render("my-listings", templateVars);
-//   });
 
 
 module.exports = router;
