@@ -54,6 +54,10 @@ h1{
   width: 100%;
   border-radius: 1em;
 
+  // overflow: hidden; // just masks child elements
+  overflow: scroll;    // applies scrolling of child elements within parent div
+  overflow-x:hidden;   // hides horizontal scroll UI
+
   border: 3px dashed limegreen;
 }
 
@@ -76,4 +80,27 @@ h1{
   width: 90%;
 
   border: 3px dashed blue;
+}
+
+//Dynamic elements
+
+.inbox-entry{
+  margin: 25px;
+  border: 3px dashed black;
+  display: flex;
+  justify-content: space-between;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
+  background-color: rgb(216, 248, 255); /* Red with 50% opacity */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {   /* extra playing around with pseudo selectors on the scroll bar*/
+  width: 14px; 
+  background-color: #d7d7d7; 
+}
+::-webkit-scrollbar-thumb {
+  background-color: #4056A1; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #5ec9ff; 
 }
