@@ -7,20 +7,30 @@
 
 const express = require('express');
 const router  = express.Router();
-const getMessages = require('../db/queries/getMessagesByID');
+const queryMessage = require('../db/queries/getMessagesByID');
+
+const cookieSession = require('cookie-session');
+router.use(cookieSession({
+  name: 'session',
+  keys: ['superSecretKey', 'superSecretKey2'], /* secret keys */
+  maxAge: 24 * 60 * 60 * 1000 // Cookie Options (24 hours)
+}));
+
 
 router.get('/', (req, res) => {
-  // console.log(`Our req is: `, req);
   console.log(`Entered into GET MESSAGES-API YAAAY!`);
-  getMessages.getMessagesByID(2)
-      .then(users => {
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+  const cookieStored = req.session.user_id;
+
+  queryMessage.getMessagesByID(cookieStored)     // Retrieve message from db
+  .then(messages => {
+    console.log(`Entered JSON route for messages`);
+    res.json({ messages });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 });
 
 module.exports = router;
