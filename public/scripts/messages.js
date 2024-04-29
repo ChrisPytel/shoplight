@@ -16,6 +16,13 @@ $(document).ready(function() {
 
   });
 
+  //My version of the XSS escape function
+  const xssSanitize = function(string) {
+    const cleanString = string.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    console.log(`Sanitized string is now:\n `, string);
+    return cleanString;
+  };
+
   const renderInboxItems = function(mailObj) {
     console.log(`Our mailObj is: `, mailObj);
     mailObj.forEach((message) => {
@@ -28,17 +35,18 @@ $(document).ready(function() {
   const markupInboxEntry = function(message) {
    console.log(`Our message is: `, message); 
 
+   
     return $(`
-    <button class ="inbox-entry">      
+    <article class ="inbox-entry">      
       <div>
-        <h4>Message from: ${message.from}</h4>
-        <p>Re:${message.listing}</p>
+        <h4>Message from: ${xssSanitize(message.from)}</h4>
+        <p>Re:${xssSanitize(message.listing)}</p>
       </div>
       <div>
         <h4>Sent on: ${message.date_sent}</h4>
         <p>Status: Unread</p>
       </div>  
-    </button>
+    </article>
     `);    
   };
 
