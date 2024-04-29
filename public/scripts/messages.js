@@ -5,7 +5,7 @@
 $(document).ready(function() {
   console.log("Successfully loaded jQuery on messages.js script attached to messages.ejs");
     
-  $('.refresh').on('click', function(event){
+  $('.refresh').on('click', function(){
     console.log(`Refreshed Inbox!`);
     fetchMail();   
   });
@@ -41,29 +41,31 @@ $(document).ready(function() {
     return `${year}-${month}-${day} at ${hours}:${minutes} ${suffix}`;    
   };
 
-  const renderInboxItems = function(mailObj) {
-    console.log(`Our mailObj is: `, mailObj);
-    for (let i = 0; i < mailObj.length; i++) {
+  const renderInboxItems = function(mailObjects) {
+    console.log(`Our mailObjects: `, mailObjects);
+    for (let i = 0; i < mailObjects.length; i++) {                //refactored forEach into a C style to generate ID based on loop iteration
       const id = i+1;
-      const entry = markupInboxEntry(mailObj[i], id);         //passes the individual message to markup function and the ID from the Cstyle index
-      setTimeout(() => {
-        $('.inbox').append(entry);                              // takes return value and appends it to the top of the inbox container
-        
-      }, 500);
+      const entry = markupInboxEntry(mailObjects[i], id);         //passes the individual message to markup function and the ID from the Cstyle index
+        $('.inbox').append(entry);                             // takes return value and renders it in the inbox container
 
-      $(`.inbox-id-${id}`).on('click', function(event){             //created before appended elements, does not register
-        console.log(`Selected an Inbox item`, event);
-
-      });
+        $(`.inbox-id-${id}`).on('click', function(){       //creates an event listener on the DOM to target THIS particular inbox item
+          console.log(`Selected Inbox item #${id}!`);
+          $('.drawing-space').empty();                            //Wipes any old messages from page 
+          const message = renderMessage(mailObjects[i], id);
+          $('.drawing-space').append(message);                             // takes return value and renders it in the inbox container
+        });
     }
     
   };
 
 
+
+
+
   /* Pseudocode for taclking message rendering and form population */
   
   // target the drawing space
-  // paste the message into the drawing space, create a function to create markup for the message renderer
+  // paste the message into the drawing space, restructure into function to create markup for the message renderer
   // clear the message after the event listener has been pressed again
   //
   // render our reply button
@@ -73,24 +75,57 @@ $(document).ready(function() {
 
   
   //Creates the HTML markup to be appended later to the HTML
-  const markupInboxEntry = function(message, id) {
-  //  console.log(`Our inbox item contains: `, message); 
+    const markupInboxEntry = function(message, id) {
+    //  console.log(`Our inbox item contains: `, message); 
+    console.log(`Our message.message is: `, message.message);  
     const readableDate = sqlDateConversion(message.date_sent)
-    console.log(`Our message.message is: `, message.message);
-
+    let readStatus = "Unread";
+      if (message.read_status === true){
+        readStatus === "Read";
+      } 
     return $(`
-    <article class ="inbox-entry inbox-id-${id}">      
+    <article class ="inbox-entry inbox-id-${id}">
       <div>
         <h4>Message from: ${xssSanitize(message.from)}</h4>
         <p>Re:${xssSanitize(message.listing)}</p>
       </div>
       <div>
         <h4>Sent on: ${readableDate}</h4>
-        <p>Status: Unread</p>
-      </div>  
+        <p class = "read-status-${id}">${readStatus}</p>
+      </div>
     </article>
     `);    
   };
+
+
+  const renderMessage = function(message, id) {
+      console.log(`Our message drawer is: `, message.message, `\nFor item# ${id}`); 
+
+      if (!message.message) { //In the event message is undefined
+        return $(`
+          <div>
+            <p>Internal Server Error 500, Error in getting message from inbox</p>
+          </div>
+        `);
+      }else {
+        return $(`
+        <div>
+          <p>${xssSanitize(message.message)}</p>
+        </div>
+        <div>
+          <i class="fa-solid fa-reply"></i>
+        </div>  
+      `);        
+      }
+    };
+
+
+    const drawReplyFormForID = function(originalPoster) {
+      // Function code goes here
+
+    };
+
+
 
 
 const fetchMail = () => {
