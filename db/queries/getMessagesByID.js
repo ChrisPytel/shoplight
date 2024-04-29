@@ -11,7 +11,7 @@ const getMessagesByID = (id) => {
   return db.query(queryString,[id])
     .then(data => {
       console.log(`Our DB returned: `, data.rows);
-      return data.rows[0].name; //returns the name corresponding the ID number of the stored cookie
+      return data.rows; //returns the name corresponding the ID number of the stored cookie
     })
     .catch(err => {
       console.log(`Got an error during getMessagesByID query:\n`, err);
