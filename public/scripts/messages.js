@@ -6,10 +6,9 @@ $(document).ready(function() {
   console.log("Successfully loaded jQuery on messages.js script attached to messages.ejs");
     
   $('.refresh').on('click', function(){
-    console.log(`Refreshed Inbox!`);
+    console.log(`Refreshed Inbox!`);    
     fetchMail();   
   });
-
 
 
   //My version of the XSS escape function
@@ -43,19 +42,30 @@ $(document).ready(function() {
 
   const renderInboxItems = function(mailObjects) {
     console.log(`Our mailObjects: `, mailObjects);
-    for (let i = 0; i < mailObjects.length; i++) {                //refactored forEach into a C style to generate ID based on loop iteration
-      const id = i+1;
-      const entry = markupInboxEntry(mailObjects[i], id);         //passes the individual message to markup function and the ID from the Cstyle index
-        $('.inbox').append(entry);                             // takes return value and renders it in the inbox container
+    let initialDelay = 0;  // delay before writing begins
+    let writeSpeed = 150;  //speed in milliseconds between iterations
 
-        $(`.inbox-id-${id}`).on('click', function(){       //creates an event listener on the DOM to target THIS particular inbox item
+
+    for (let i = 0; i < mailObjects.length; i++) {                       // Refactored forEach into a C style to generate ID based on loop iteration
+      const id = i+1; 
+      
+      setTimeout(() => {  // ---------------------------- Start of setTimeout ------------------------------
+        const entry = markupInboxEntry(mailObjects[i], id);              // Passes the individual message to markup function and the ID from the Cstyle index
+        $('.inbox').append(entry);                                       // Takes return value and renders it in the inbox container    
+
+        $(`.inbox-id-${id}`).on('click', function(){                     // Creates an event listener on the DOM to target THIS particular inbox item
           console.log(`Selected Inbox item #${id}!`);
-          $('.drawing-space').empty();                            //Wipes any old messages from page 
+          $('.drawing-space').empty();                                   // Wipes any old messages from page 
           const message = renderMessage(mailObjects[i], id);
-          $('.drawing-space').append(message);                             // takes return value and renders it in the inbox container
+          $('.drawing-space').append(message);                           // Creates our message markup and appends it to the drawing-space
+                    
+          // const replyForm = drawReplyFormForID(mailObjects[i], id);
+          // $('.wrappper').append(replyForm);
         });
-    }
-    
+                
+      }, initialDelay);
+      initialDelay = initialDelay + writeSpeed; // ---------- End of setTimeout ------------------------------
+    }    
   };
 
 
@@ -68,7 +78,7 @@ $(document).ready(function() {
   // paste the message into the drawing space, restructure into function to create markup for the message renderer
   // clear the message after the event listener has been pressed again
   //
-  // render our reply button
+  // render our reply button with dynamic ID
   // render our form, pass in ID to post to our DB
   // If the reply button is pressed, use css to reveal the hidden form
 
@@ -100,7 +110,6 @@ $(document).ready(function() {
 
   const renderMessage = function(message, id) {
       console.log(`Our message drawer is: `, message.message, `\nFor item# ${id}`); 
-
       if (!message.message) { //In the event message is undefined
         return $(`
           <div>
@@ -120,9 +129,23 @@ $(document).ready(function() {
     };
 
 
-    const drawReplyFormForID = function(originalPoster) {
+    const drawReplyFormForID = function(message, id) {
       // Function code goes here
+      console.log(`Created markup for form corresponding to inbox item# ${id}`); 
 
+        return $(`
+        <section class = "outgoing reply-${id}">
+          <form class="form-container">
+          <h3>Reply to: </h3>
+
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>          
+        </section>
+      `);
     };
 
 
@@ -143,6 +166,6 @@ const fetchMail = () => {
   });   
 };  
 
-// fetchMail();
+// fetchMail(); //uncomment do have DOM initialize the fetchMail sequence on its own
 
 }); // --------- end of $(document).ready ---------
