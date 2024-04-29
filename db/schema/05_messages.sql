@@ -5,5 +5,6 @@ CREATE TABLE messages (
   user_id_to INTEGER REFERENCES users(id) NOT NULL,
   user_id_from INTEGER REFERENCES users(id) NOT NULL,
   product_id INTEGER REFERENCES products(id) NOT NULL,
-  date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  read_status BOOL DEFAULT false
 );
