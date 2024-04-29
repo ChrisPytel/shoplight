@@ -19,8 +19,30 @@ $(document).ready(function() {
   //My version of the XSS escape function
   const xssSanitize = function(string) {
     const cleanString = string.replace(/</g, "&lt;").replace(/>/g, "&gt;")
-    console.log(`Sanitized string is now:\n `, string);
+    // console.log(`Sanitized string is now:\n `, string);
     return cleanString;
+  };
+
+  //Not sure exactly what goes on here, but thank you stack overflow, very cool
+  const sqlDateConversion = function(sqlDate) {
+    const dateObj = new Date(sqlDate);
+    console.log(`Our dateObj is: `, dateObj);    
+    const year = dateObj.getFullYear();
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based, so add 1
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    let hours = dateObj.getHours();
+    const minutes = dateObj.getMinutes().toString().padStart(2, '0');  
+
+    // Convert hours to 12-hour format and determine AM/PM suffix
+    let suffix = 'AM';
+    if (hours >= 12) {
+        suffix = 'PM';
+        hours %= 12; 
+    }
+    if (hours === 0) {
+        hours = 12; // Handle midnight (0 hours) as 12 AM
+    }  
+    return `${year}-${month}-${day} at ${hours}:${minutes} ${suffix}`;    
   };
 
   const renderInboxItems = function(mailObj) {
@@ -30,12 +52,13 @@ $(document).ready(function() {
       $('.inbox').append(entry); // takes return value and appends it to the top of the tweets container
     });
   };
+
   
   //Creates the HTML markup to be appended later to the HTML
   const markupInboxEntry = function(message) {
    console.log(`Our message is: `, message); 
+    const readableDate = sqlDateConversion(message.date_sent)
 
-   
     return $(`
     <article class ="inbox-entry">      
       <div>
@@ -43,13 +66,12 @@ $(document).ready(function() {
         <p>Re:${xssSanitize(message.listing)}</p>
       </div>
       <div>
-        <h4>Sent on: ${message.date_sent}</h4>
+        <h4>Sent on: ${readableDate}</h4>
         <p>Status: Unread</p>
       </div>  
     </article>
     `);    
   };
-
 
 
 const fetchMail = () => {
