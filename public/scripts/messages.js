@@ -10,6 +10,12 @@ $(document).ready(function() {
     fetchMail();   
   });
 
+  $('.inbox-entry').on('click', function(event){    //created before appended elements, does not register
+    console.log(`Selected an Inbox item`, event);
+    event.preventDefault();
+
+  });
+
   const renderInboxItems = function(mailObj) {
     console.log(`Our mailObj is: `, mailObj);
     mailObj.forEach((message) => {
@@ -20,24 +26,21 @@ $(document).ready(function() {
   
   //Creates the HTML markup to be appended later to the HTML
   const markupInboxEntry = function(message) {
-   console.log(`Our message is: `, message);  
+   console.log(`Our message is: `, message); 
 
     return $(`
-    <article class ="inbox-entry">      
+    <button class ="inbox-entry">      
       <div>
-        <h4>Message from: </h4>
-        <p>Re: </p>
+        <h4>Message from: ${message.from}</h4>
+        <p>Re:${message.listing}</p>
       </div>
       <div>
-        <h4>Sent on: </h4>
-        <p>Status: </p>
+        <h4>Sent on: ${message.date_sent}</h4>
+        <p>Status: Unread</p>
       </div>  
-    </article>
+    </button>
     `);    
   };
-
-
-
 
 
 
@@ -47,8 +50,8 @@ const fetchMail = () => {
     method: 'GET',  // HTTP methods are: 'GET', 'POST', 'PUT', 'DELETE'
     success: function(dataOnSuccess){
       console.log(`$.ajax GET request came through. Data is: `, dataOnSuccess);       
-      $('.inbox').empty(); // Purges any old Inbox Entries from page  
-      renderInboxItems(dataOnSuccess.messages);
+      $('.inbox').empty();                            //Purges any old Inbox Entries from page  
+      renderInboxItems(dataOnSuccess.messages);       //Initializes chain of rendering the inbox items
     },  
     error: function(error){
       console.error(`$.ajax ${this.method} request error on route: '${this.url}'\nDetails:`, error);
