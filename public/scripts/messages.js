@@ -6,9 +6,10 @@ $(document).ready(function() {
   console.log("Successfully loaded jQuery on messages.js script attached to messages.ejs");
     
   //Event listener to kickoff chain of fetchingMail from DB
-  $('.refresh').on('click', function(){
+  $('.refresh-icon').on('click', function(){
     console.log(`Refreshed Inbox!`);
     $('.drawing-space').empty();
+    $('.outgoing').empty();
     fetchMail();   
   });
   
@@ -47,23 +48,28 @@ $(document).ready(function() {
         // Creates an event listener on the DOM to target THIS particular inbox item
         $(`.inbox-id-${id}`).on('click', function(){                     
           console.log(`Selected Inbox item #${id}!`);
-          $('.drawing-space').empty();                                   // Wipes any old messages from page 
-          const message = renderMessage(mailObjects[i], id);
-          $('.drawing-space').append(message);                           // Creates our message markup and appends it to the drawing-space
-                    
-          // const replyForm = drawReplyFormForID(mailObjects[i], id);
-          // $('.wrappper').append(replyForm);
+          $('.outgoing').empty();
+          const message = renderMessage(mailObjects[i], id);                             // Creates our message markup and appends it to the drawing-space  
+          $('.drawing-space').empty().append(message);                                   // Wipes any old messages from page, appends new one 
+
+          // Creates an event listener on the Reply Button to toggle form visibility
+          $('.reply-icon').on('click', function(){                
+            console.log('cool');
+
+            const replyForm = createReplyForm(mailObjects[i], id);
+            console.log(`Our replyForm is: `, replyForm);
+            $('.outgoing').empty().append(replyForm);
+          });
         });
                 
       }, initialDelay);
       initialDelay = initialDelay + writeSpeed; // ---------- End of setTimeout ------------------------------
     }    
   };
-  
-  //Creates the HTML markup to be appended later to the HTML
+
+   //Creates the HTML markup to be appended later to the HTML
     const createInboxEntry = function(message, id) {
-    //  console.log(`Our inbox item contains: `, message); 
-    console.log(`Our message.message is: `, message.message);  
+    console.log(`Inbox item #${id} contains: `, message); 
     const readableDate = sqlDateConversion(message.date_sent)
     let readStatus = "Unread";
       if (message.read_status === true){
@@ -72,8 +78,8 @@ $(document).ready(function() {
     return $(`
     <article class ="inbox-entry inbox-id-${id}">
       <div>
-        <h4>Message from: ${xssSanitize(message.from)}</h4>
-        <p>Re:${xssSanitize(message.listing)}</p>
+        <h4>Message from ${xssSanitize(message.from)}</h4>
+        <p>Re: ${xssSanitize(message.listing)}</p>
       </div>
       <div>
         <h4>Sent on: ${readableDate}</h4>
@@ -84,7 +90,7 @@ $(document).ready(function() {
   };
 
   const renderMessage = function(message, id) {
-      console.log(`Our message drawer is: `, message.message, `\nFor item# ${id}`); 
+      console.log(`Our renderMessage is:\n`, message.message, `\nFor inbox-item #${id}`); 
       if (!message.message) { //In the event message is undefined
         return $(`
           <div>
@@ -96,31 +102,34 @@ $(document).ready(function() {
         <div>
           <p>${xssSanitize(message.message)}</p>
         </div>
-        <div>
+        <div class= "reply-icon">
           <i class="fa-solid fa-reply"></i>
-        </div>  
-      `);        
+          <p>Reply</p>
+        </div>
+      `);
       }
     };
 
-    const drawReplyFormForID = function(message, id) {
+    const createReplyForm = function(message, id) {
       // Function code goes here
-      console.log(`Created markup for form corresponding to inbox item# ${id}`); 
+      console.log(`Created markup for form corresponding to inbox item # ${id}`); 
+      console.log(`Our reply target is: `, message.from);
 
-        return $(`
-        <section class = "outgoing reply-${id}">
-          <form class="form-container">
-          <h3>Reply to: </h3>
-
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required>
-      
-          <button type="submit" class="btn">Login</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-          </form>          
-        </section>
+      return $(`
+      <section class = "outgoing">
+        <div class = "reply-form-container form-${id}">
+          <form class="reply-form" method="POST" action="/messages">
+            <p>Replying to <b>${xssSanitize(message.from)}</b> </p>
+            <textarea placeholder="My Reply..." name="text" type="text" class="textarea"></textarea>
+            <input type="hidden" id="metadata1" name="user_id_from" value="${message.user_id_from}">
+            <input type="hidden" id="metadata2" name="user_id_to" value="${message.user_id_to}">
+            <button type="submit" class="send-button">Send</button>
+          </form>
+        </div>
+      </section>
       `);
     };
+ 
 
   /* Pseudocode for taclking message rendering and form population */
   
