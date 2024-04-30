@@ -121,8 +121,9 @@ $(document).ready(function() {
           <form class="reply-form" method="POST" action="/messages">
             <p>Replying to <b>${xssSanitize(message.from)}</b> </p>
             <textarea placeholder="My Reply..." name="text" type="text" class="textarea"></textarea>
-            <input type="hidden" id="metadata1" name="user_id_from" value="${message.user_id_from}">
-            <input type="hidden" id="metadata2" name="user_id_to" value="${message.user_id_to}">
+            <input type="hidden" id="reply_from" name="user_id_from" value="${message.user_id_to}">
+            <input type="hidden" id="reply_to" name="user_id_to" value="${message.user_id_from}">
+            <input type="hidden" id="listing" name="product_id" value="${message.product_id}">
             <button type="submit" class="send-button">Send</button>
           </form>
         </div>

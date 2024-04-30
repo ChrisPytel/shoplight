@@ -47,10 +47,10 @@ router.get('/', (req, res) => {
 //Handles any post requests on messages
   router.post("/", (req, res) => {
     console.log("Entered the post route for sending replies to DB WOW!");
-    console.log(`Our TEXT is: `, req.body.text);
-    console.log(`Our TO is: `, req.body.user_id_to);
-    console.log(`Our FROM is: `, req.body.user_id_from);
-    console.log(`Our PROD# is: `, req.body.product_id);
+    console.log(`Reply TEXT: `, req.body.text);
+    console.log(`Reply TO userID#: `, req.body.user_id_to);
+    console.log(`Reply FROM userID#: `, req.body.user_id_from);
+    console.log(`Reply PROD#: `, req.body.product_id);
     postMessage.sendMessage(req.body.text, req.body.user_id_to, req.body.user_id_from, req.body.product_id);    
   });
 
