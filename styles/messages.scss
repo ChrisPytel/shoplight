@@ -1,0 +1,204 @@
+@import 'colors';
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgb(235, 184, 88) 0%,
+    rgb(219, 190, 163) 20%,
+    rgb(219, 178, 163) 34%,
+    rgb(235, 178, 201) 59%,
+    rgb(244, 211, 162) 74%,
+    rgb(255, 194, 153) 100%
+  );
+}
+
+h1 {
+  font: 600 3rem "Syne", sans-serif;
+  color: $accent-color;
+}
+
+.wrapper{
+  width: 90%;
+}
+
+.incoming{
+  margin-top: 400px;
+  display: flex;
+  justify-content: space-between;
+  border: 3px dashed fuchsia;
+}
+
+h1{
+  display: flex;
+  justify-content: center;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
+}
+
+.inbox-container{
+  width: 55%;  
+  border: 3px dashed blueviolet;
+}
+
+
+.refresh-icon{
+  margin: 25px;
+}
+.refresh-icon, .reply-icon{
+  color: rgba(0, 0, 0, 50%);
+  font-size: 1.4em;
+  font-weight: bold;  
+}
+.refresh-icon:hover, .reply-icon:hover{
+  color: #59d759;
+  text-shadow: 2px 2px  rgba(0, 0, 0, 80%);
+  transition: color 0.1s ease-in;
+}
+.refresh-icon:active, .reply-icon:active{
+  color: #278a27;
+}
+
+.inbox{ 
+  height: 350px;
+  width: 37%;
+  background-color: rgb(255, 247, 236);
+  width: 100%;
+
+  // overflow: hidden; // just masks child elements
+  overflow: scroll;    // applies scrolling of child elements within parent div
+  overflow-x:hidden;   // hides horizontal scroll UI
+
+  border: 3px dashed limegreen;
+}
+
+.inbox, .message-container, .reply-form{
+  background-color: rgb(255, 247, 236);
+  border-radius: 1em;
+}
+
+.message-container{
+  height: auto;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
+  
+  border: 3px dashed orangered;
+}
+
+.drawing-space{
+  height: 90%;
+  width: 90%;
+  border: 3px dashed blue;
+}
+
+::-webkit-scrollbar {   /* extra playing around with pseudo selectors on the scroll bar*/
+  width: 14px; 
+  background-color: #fde8cf; 
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d08fdb; 
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ffbdad; 
+}
+
+
+//Dynamic elements
+
+.inbox-entry{
+  margin: 25px;
+  border: 3px dashed black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(216, 248, 255);
+  border-radius: 4px;
+  // visibility: hidden;
+  // opacity: 0;
+  // transition: visibility 1s, opacity 1 ease;        /* Transition for opacity when items are drawn */
+}
+
+.inbox-entry:hover{
+  box-shadow: 5px 5px rgb(224, 224, 224);
+}
+
+.inbox-entry:active{
+  box-shadow: 5px 5px #d08fdb;
+}
+
+.drawing-space{
+  font-size: 2em;
+  font-weight: normal; 
+  position: relative; 
+}
+
+.reply-icon{  
+  font-size: 1.4em;
+  border: 3px dashed lightcoral;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
+}
+
+.reply-icon i{
+  padding-right: 20px;
+}
+
+.outgoing{
+  border: 3px dashed saddlebrown;
+}
+.reply-form{
+  margin: 50px 0;
+  width: 100%;
+  height: 400px;
+  border: 3px dashed blueviolet;
+  position:relative;
+}
+
+.reply-form p{
+  margin: 20px;
+}
+
+.textarea{
+  background-color: rgba(0, 0, 0, 0);
+  // border: none;     /* disables the default border style*/
+  resize: none;        /* disables the little corner expansion option */
+  outline: none;       /* disables the outline box when writing */
+  border: 3px dashed limegreen;
+  color: #4056A1;
+  font-size: 1.3em;
+  width: 100%;
+  padding: 0 30px;
+  height: 60%;
+}
+
+.reply-form button{
+  background: #d08fdb;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  margin: 20px;
+  border: none;
+  border-radius: 0.5em;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+.reply-form button:hover{
+  background: #ffbdad;
+  color: #ffffff;
+  transition: all 0.2s ease-in;
+}
