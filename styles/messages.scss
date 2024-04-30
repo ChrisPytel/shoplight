@@ -29,7 +29,7 @@ h1 {
 }
 
 .incoming{
-  margin: 40px auto;
+  margin-top: 400px;
   display: flex;
   justify-content: space-between;
   border: 3px dashed fuchsia;
@@ -46,28 +46,29 @@ h1{
   border: 3px dashed blueviolet;
 }
 
-.refresh{
-  color: rgba(0, 0, 0, 50%);
-  font-size: 1.4em;
+
+.refresh-icon{
   margin: 25px;
 }
-.refresh:hover{
-  color: #59d759;
-  text-shadow: 1px 1px  #000000;
-  transition: color 0.2s ease-in;
+.refresh-icon, .reply-icon{
+  color: rgba(0, 0, 0, 50%);
+  font-size: 1.4em;
+  font-weight: bold;  
 }
-.refresh:active{
-  font-weight: bold;;
+.refresh-icon:hover, .reply-icon:hover{
   color: #59d759;
+  text-shadow: 2px 2px  rgba(0, 0, 0, 80%);
+  transition: color 0.1s ease-in;
 }
-
+.refresh-icon:active, .reply-icon:active{
+  color: #278a27;
+}
 
 .inbox{ 
   height: 350px;
   width: 37%;
   background-color: rgb(255, 247, 236);
   width: 100%;
-  border-radius: 1em;
 
   // overflow: hidden; // just masks child elements
   overflow: scroll;    // applies scrolling of child elements within parent div
@@ -76,12 +77,14 @@ h1{
   border: 3px dashed limegreen;
 }
 
+.inbox, .message-container, .reply-form{
+  background-color: rgb(255, 247, 236);
+  border-radius: 1em;
+}
+
 .message-container{
   height: auto;
   width: 40%;
-  background-color: rgb(255, 247, 236);
-  border-radius: 1em;
-
   display: flex;
   flex-direction: column;
   justify-content: center;  /* Aligns child elements horizontally (left and right) */
@@ -120,7 +123,6 @@ h1{
   align-items: center;
   background-color: rgb(216, 248, 255);
   border-radius: 4px;
-
   // visibility: hidden;
   // opacity: 0;
   // transition: visibility 1s, opacity 1 ease;        /* Transition for opacity when items are drawn */
@@ -135,22 +137,68 @@ h1{
 }
 
 .drawing-space{
-  font-size: 1.4em;
+  font-size: 2em;
   font-weight: normal; 
   position: relative; 
 }
 
-.drawing-space i{
-  color:#656565;
-  font-size: 2em;
+.reply-icon{  
+  font-size: 1.4em;
   border: 3px dashed lightcoral;
   position: absolute;
   bottom: 0;
   right: 0;
+  display: flex;
+  justify-content: center;  /* Aligns child elements horizontally (left and right) */
+  align-items: center;      /* Aligns child elements vertically (up and down) */
 }
 
+.reply-icon i{
+  padding-right: 20px;
+}
+
+.outgoing{
+  border: 3px dashed saddlebrown;
+}
 .reply-form{
-  background-color: grey;
+  margin: 50px 0;
+  width: 100%;
   height: 400px;
-  width: 400px;
+  border: 3px dashed blueviolet;
+  position:relative;
+}
+
+.reply-form p{
+  margin: 20px;
+}
+
+.textarea{
+  background-color: rgba(0, 0, 0, 0);
+  // border: none;     /* disables the default border style*/
+  resize: none;        /* disables the little corner expansion option */
+  outline: none;       /* disables the outline box when writing */
+  border: 3px dashed limegreen;
+  color: #4056A1;
+  font-size: 1.3em;
+  width: 100%;
+  padding: 0 30px;
+  height: 60%;
+}
+
+.reply-form button{
+  background: #d08fdb;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  margin: 20px;
+  border: none;
+  border-radius: 0.5em;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+.reply-form button:hover{
+  background: #ffbdad;
+  color: #ffffff;
+  transition: all 0.2s ease-in;
 }
