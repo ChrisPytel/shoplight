@@ -44,12 +44,13 @@ router.get('/', (req, res) => {
 
 
 //Handles any post requests on messages
-/*   router.post("/", (req, res) => {
+  router.post("/", (req, res) => {
   // our code goes here
-
+    console.log("Entered the post route for sending replies to DB WOW!");
+    console.log(`Our req is: `, req.body.text);
 
 
     
-  }); */
+  });
 
 module.exports = router;
