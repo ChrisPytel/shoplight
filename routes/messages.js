@@ -24,22 +24,25 @@ router.get('/', (req, res) => {
   console.log(`Our cookieStored is: `, cookieStored);
 
   if (cookieStored){
-    const queryPromise = queryUser.getUserByID(cookieStored);
-    queryPromise
+    const displayNamePromise = queryUser.getUserByID(cookieStored);
+    displayNamePromise
     .then((result) => {
     console.log('Name for signed in user:', result);
     const templateVars ={
-      cookieStored,                   //Effectively a bool, representing if a cookie is set
+      cookieStored,        //Effectively a bool, representing if a cookie is set
       displayName: result
     };
     res.render('messages', templateVars);
+    return;
     })
     .catch(err =>{
       console.log('Got an error, couldnt fetch Username for stored cookieID', err);
-      res.render('messages');
-    })  
+      res.redirect('/');
+      return;
+    })
   }else{ //If no cookie is stored, redirect to home page
-    res.render('index');
+    res.redirect('/');
+    return;
   }
 }); 
 
