@@ -14,12 +14,11 @@ const searchListings = (options) => {
   WHERE 1=1`;
 
   // keyword option
-  // if (options.name_or_description) {
-  //   console.log("keyword entered");
-  //   queryParams.push(options.name_or_description);
-  //   queryString += `
-  // AND LOWER(products.name) LIKE LOWER('%$1%') OR LOWER(products.description) LIKE LOWER('%$1%') `;
-  // }
+  if (options.name_or_description) {
+    queryParams.push(`%${options.name_or_description}%`);
+    queryString += `
+  AND LOWER(products.name) LIKE LOWER($${queryParams.length}) OR LOWER(products.description) LIKE LOWER($${queryParams.length}) `;
+  }
 
   // price option
   if (options.minimum_price) {
