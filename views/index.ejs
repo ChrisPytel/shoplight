@@ -61,10 +61,18 @@
                 <div class="product-icons">
                   <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
                   <div class="message-seller">
-                    <a href="/messages">
+                    <button class="open-button" onclick="toggleForm()">
                       <i class="fa-regular fa-envelope"></i>
                       <i class="fa-solid fa-envelope"></i>
-                    </a>
+                    </button>
+                    <div class="form-popup" id="myForm">
+                      <form action="/action_page.php" class="form-container">  <!-- Change form action to post new message to database -->
+                        <label for="message-to-seller">Send message to <%= featured.user_id %></label> <!-- Need to change this to join users table and fetch seller name -->
+                        <input type="text" placeholder="Say hello!" name="message-to-seller" required>
+
+                        <button type="submit" class="button-flash">Send</button>
+                      </form>
+                    </div>
                   </div>
                   <div class="add-favorite">
                     <form action="/add-to-favorites" method="post">
