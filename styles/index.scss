@@ -5,7 +5,8 @@
   height: 100vh;
   padding: 220px 120px 120px 120px;
   // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
-  background: url(https://images2.imgbox.com/44/97/y4KaEhFj_o.jpg);
+  background: url(https://images2.imgbox.com/44/97/y4KaEhFj_o.jpg);   /* full size */
+  background: url(https://i.imgur.com/xdBZzyE.jpeg);   /* shorter version*/
   z-index: 100;
   background-size: cover;
   background-position: center;
@@ -21,7 +22,7 @@
   background: url(https://images2.imgbox.com/e2/8d/ZTZqA3Yu_o.png);
   z-index: 102;
   right: 0;
-  top: 250px;
+  top: 130px;
   background-size: 500px;
   height: 140px;
   width: 500px;
@@ -36,7 +37,7 @@
   background: url(https://images2.imgbox.com/b8/37/zWJXhL32_o.png);
   z-index: 104;
   right: 0;
-  top: 400px;
+  top: 250px;
   height: 140px;
   width: 400px;
   background-size: 350px;
@@ -248,6 +249,13 @@
 .featured-product-listings-container > .product-container {
   scroll-snap-align: start;
   flex-shrink: 0;
+}
+
+
+//temporarily disables sideways scrolling on scrollbar as a presentation precaution
+//NOTE - doesnt resolve the issue of listings not wrapping within the boundaries of screen width
+html {
+  overflow-x: hidden;
 }
 
 
