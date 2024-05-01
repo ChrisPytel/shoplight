@@ -4,10 +4,44 @@
   width: 100vw;
   height: 100vh;
   padding: 220px 120px 120px 120px;
+  // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
+  background: url(https://images2.imgbox.com/44/97/y4KaEhFj_o.jpg);
+  z-index: 100;
+  background-size: cover;
+  background-position: center;
+  min-height: calc(100vh - 100px);
+  position: relative;
+  // border: 3px dashed limegreen;
 }
 
-.index-splash-title {
-  font: 600 7rem "Syne", sans-serif;
+.index-splash-logo {                      
+  position: absolute;
+  // super janky solution, polish up later, similar solution to InDesign img frames
+  // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
+  background: url(https://images2.imgbox.com/e2/8d/ZTZqA3Yu_o.png);
+  z-index: 102;
+  right: 0;
+  top: 250px;
+  background-size: 500px;
+  height: 140px;
+  width: 500px;
+  background-repeat: no-repeat;
+  // border: 3px dashed rgb(105, 197, 105);
+}
+
+.index-splash-tagline {                    
+  position: absolute;
+  // super janky solution, polish up later, similar solution to InDesign img frames
+  // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
+  background: url(https://images2.imgbox.com/b8/37/zWJXhL32_o.png);
+  z-index: 104;
+  right: 0;
+  top: 400px;
+  height: 140px;
+  width: 400px;
+  background-size: 350px;
+  background-repeat: no-repeat;
+  // border: 3px dashed rgb(30, 105, 122);
 }
 
 .index-featured, .index-listings {
