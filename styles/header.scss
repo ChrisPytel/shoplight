@@ -31,3 +31,25 @@
   font: 500 1rem "Montserrat", sans-serif;
   color: $secondary-color;
 }
+
+
+.logout-button{
+  background: #d08fdb;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  margin: 20px;
+  border: none;
+  border-radius: 0.5em;
+}
+.logout-button:hover{
+  background: #ffbdad;
+  color: #ffffff;
+  transition: all 0.2s ease-in;
+}
+
+button{
+  background:inherit;
+  color: inherit;
+  border: inherit;
+}
