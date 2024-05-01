@@ -20,7 +20,7 @@ router.use(cookieSession({
 // Logs the current user out, wipes any stored cookies, and redirects to the login page
 router.post("/", (req, res) => {
   req.session = null;
-  res.redirect("/login");
+  res.redirect("/");
 });
 
 module.exports = router;

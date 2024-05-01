@@ -2,40 +2,69 @@
 <html lang="en">
 
 <head>
-  <title>Messages</title>
+  <title>Message Inbox</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"/>
+  
+  <!-- External FontAwesome Assets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  
+  <!-- Pre-installed CSS -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
+  
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/footer.css" />
+  <link rel="stylesheet" href="/styles/messages.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/messages.js"></script>
+  <script defer src="./scripts/messages.js"></script>
 </head>
 
 <body>
+  <%- include('partials/_header') %>
 
-  <h1>   This is the page for checking your messages from other users!💬</h1>
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
+  <div class="wrapper">    
+    <section class="incoming">      
+      <div class = "inbox-container">
+        <h1>Message Inbox  📬</h1>  
+        <div class = "refresh-icon">
+          <span>Refresh</span>
+          <i class="fa-solid fa-rotate"></i>
+        </div>
+        <div class="inbox"> 
+          <!-- Inbox items are appended here -->        
+        </div>
+      </div>
+      <div class = "message-container"> 
+        <div class="drawing-space">          
+          <!-- Contents of a message are drawn here -->
+        </div>
+      </div>    
+    </section>   
+    <section class="outgoing">
+      <!--  Stretch: Append Reply Form  here -->    
+    </section> 
+  </div>
 
 </body>
-
 </html>
