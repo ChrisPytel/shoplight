@@ -1,26 +1,38 @@
 <header>
   <nav class="navbar">
+
     <div class="nav-left">
-      <a href="/"><img src="https://placehold.co/120x32" alt="ShopLight Logo" width="120"></a>
+      <!-- if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below -->
+      <a href="/"><img src="https://images2.imgbox.com/e2/8d/ZTZqA3Yu_o.png" alt="ShopLight Logo" width="250"></a>
     </div>
 
     <div class="nav-right">
-      <a class="nav-link" href="/search">Search</a>
-
+      
       <% if (!cookieStored) { %>    <!-- If user cookie isnt stored as a logged in account, display options -->
-
-        <a class="nav-item" href ="/login">Login</a>
-        <a class="nav-item">Register</a>
-
+        
+      <a class="nav-item">
+        <form class="logout-button" method="GET" action="/login">
+          <button type="submit">Login</button>
+        </form>
+      </a class="nav-item">
+      
+      <a class="nav-item">
+        <form class="logout-button" method="GET" action="/register">
+          <button type="submit">Register</button>
+        </form>  
+      </a class="nav-item">      
+     
       <% } else { %>    <!-- If user is logged in with a cookie stored, display username and button for logout -->
-
+        
+        <a class="nav-link" href="/search">Search</a>
         <a class="nav-link" href="/my-listings">My Listings</a>
         <a class="nav-link" href="/favourites">Favourites</a>
         <a class="nav-link" href="/messages">Messages</a>
 
-        Logged in as: <%= displayName %>
-        <form method="POST" action="/logout">
-          <button type="submit">Log out</button>
+        <a class="nav-link logged-in-as"><b>Logged in as:</b> <%= displayName %></a>
+        <a class="nav-link community"><b>Community:</b> Toronto Beaches</a>
+        <form class="logout-button" method="POST" action="/logout">
+          <button type="submit">Log Out</button>
         </form>
 
       <% } %>
