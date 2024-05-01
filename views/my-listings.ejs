@@ -86,13 +86,20 @@
       <div class="product-listings-container">
       <% for (const listing of listings) { %>
         <div class="product-container">
-          <div class="product-image" style="background-image:url(https://placehold.co/350x350)"><img src=<%= listing.photo_url %> class="product-image"></div>
+          <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
+            <% if (listing.is_available === 'f') { %>
+            <img src="https://i.pinimg.com/originals/42/15/f0/4215f05dd3c8913daff1f3ad165d4bde.png" class="product-image">
+            <% } %>
+          </div>
           <div class="product-box">
             <div class="product-name"><%=listing.name%></div>
             <div class="product-price"><%=listing.price%></div>
             <div class="product-description"><%=listing.description%></div>
             <div class="product-icons">
-              <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
+              <form action="/mark-as-sold" method="post">
+                <button type="submit" class="mark-as-sold">
+                  <i class="fa-solid fa-circle-check"></i>
+                </button>
               <div class="message-seller">
                 <a href="/messages">
                   <i class="fa-regular fa-envelope"></i>
