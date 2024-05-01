@@ -102,6 +102,10 @@
   padding: unset;
 }
 
+.message-seller button:hover {
+  cursor: pointer;
+}
+
 .message-seller .fa-solid {
   display: none;
 }
@@ -109,7 +113,7 @@
 .message-seller button:hover .fa-solid {
   display: inline-block;
   color: $yellow;
-  text-shadow: 0 0 15px rgba(229, 171, 14, 0.5)
+  text-shadow: 0 0 15px rgba(229, 171, 14, 0.75)
 }
 
 .message-seller button:hover .fa-regular {
