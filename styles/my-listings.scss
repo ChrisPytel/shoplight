@@ -111,6 +111,11 @@ textarea {
   font-size: 1.35rem;
 }
 
+.mark-as-sold {
+  border: none;
+  background: none;
+}
+
 .message-seller a {
   color: $text-color;
 }
@@ -147,3 +152,4 @@ textarea {
 .add-favorite button:hover .fa-regular {
   display: none;
 }
+
