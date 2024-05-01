@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
               displayName,
               listings: products
           };
-          return res.render('search.ejs', templateVars);
+          return res.render('index', templateVars);
       })
       .catch((error) => {
           console.error('Error fetching data:', error);
