@@ -11,6 +11,7 @@ const router = express.Router();
 const db = require('../db/connection');
 const myListingsFn = require('../db/queries/getMyListings');
 const addNewListingFn = require('../db/queries/addNewListing');
+const markAsSoldFn = require('../db/queries/markAsSold');
 const queryUser = require('../db/queries/getUserByID');
 
 const cookieSession = require('cookie-session');
@@ -64,6 +65,21 @@ router.post("/", (req, res) => {
       console.log(err.message);
     });
 });
+
+// Handles adding to favourites
+router.post("/sold", (req, res) => {
+  return db
+  .query(`UPDATE products
+  SET is_available = False
+  WHERE products.id = $1;`,
+        [req.body.product_id]) //how do i get the product_id?
+    .then(data => {
+      return res.redirect("/");
+    })
+    .catch(error => {
+      throw error;
+    });
+})
 
 
 module.exports = router;
