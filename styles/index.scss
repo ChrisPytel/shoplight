@@ -1,4 +1,4 @@
-@import 'colors';
+@import 'variables';
 
 .index-splash {
   width: 100vw;
@@ -80,28 +80,106 @@
   flex-direction: row;
   justify-content: flex-end;
   column-gap: 15px;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   align-self: end;
 }
 
-.message-seller a {
-  color: $text-color;
+/* In stock icon styling */
+.in-stock {
+  color: $green;
+}
+
+.in-stock:hover {
+  cursor: pointer;
+  text-shadow: 0 0 15px rgba(115, 184, 33, 0.5)
+}
+
+/* Message seller styling */
+.message-seller button {
+  color: $yellow;
+  background: transparent;
+  border: 0px solid transparent;
+  padding: unset;
+}
+
+.message-seller button:hover {
+  cursor: pointer;
 }
 
 .message-seller .fa-solid {
   display: none;
 }
 
-.message-seller a:hover .fa-solid {
+.message-seller button:hover .fa-solid {
   display: inline-block;
-  color: $text-color;
-  text-shadow: 0 0 15px rgba(46, 44, 45, 0.5)
+  color: $yellow;
+  text-shadow: 0 0 15px rgba(229, 171, 14, 0.75)
 }
 
-.message-seller a:hover .fa-regular {
+.message-seller button:hover .fa-regular {
   display: none;
 }
 
+.message-seller button:focus {
+  outline: none;
+}
+
+.form-popup {                                                    /* The popup form - hidden by default */
+  display: none;
+  position: absolute;
+  z-index: 9;
+}
+
+.form-popup label {
+  font: 700 1.35rem $primary-font;
+  text-transform: capitalize;
+}
+
+.form-container {
+  box-sizing: border-box;
+  width: calc(40vw + 2px);
+  max-width: 502px;
+  background-color: $primary-color;
+  border: 1px solid $border-color;
+  padding: 30px;
+}
+
+.form-container input[type=text] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: 1px solid $border-color;
+  font: 1rem/2rem $primary-font;
+  border-radius: 5px;
+}
+
+/* Set a style for the submit/login button */
+.form-container .button-flash {
+  background-color: $yellow;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font: 1rem/2rem $primary-font;
+}
+
+.button-flash:hover {
+  animation: buttonFlash 3s infinite;
+}
+
+@keyframes buttonFlash {
+  0% { background-color: rgb(235, 184, 88); }
+  20% { background-color: rgb(219, 190, 163); }
+  34% { background-color: rgb(219, 178, 163); }
+  59% { background-color: rgb(235, 178, 201); }
+  74% { background-color: rgb(244, 211, 162); }
+  100% { background-color: rgb(255, 194, 153); }
+}
+
+
+/* Add favorite styling */
 .add-favorite button {
   all: unset
 }
@@ -112,8 +190,8 @@
 
 .add-favorite button:hover .fa-solid {
   display: inline-block;
-  color: #C21372;
-  text-shadow: 0 0 15px rgba(194, 19, 114, 0.5);
+  color: $red;
+  text-shadow: 0 0 15px rgba(218, 27, 63, 0.5);
   cursor: pointer;
 }
 
@@ -130,6 +208,7 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   gap: 60px;
+  padding-bottom: 60px;
 }
 
 .featured-product-listings-container > .product-container {
