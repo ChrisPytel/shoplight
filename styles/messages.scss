@@ -1,4 +1,4 @@
-@import 'colors';
+@import 'variables';
 
 body {
   display: flex;
@@ -42,7 +42,7 @@ h1{
 }
 
 .inbox-container{
-  width: 55%;  
+  width: 55%;
   border: 3px dashed blueviolet;
 }
 
@@ -53,7 +53,7 @@ h1{
 .refresh-icon, .reply-icon{
   color: rgba(0, 0, 0, 50%);
   font-size: 1.4em;
-  font-weight: bold;  
+  font-weight: bold;
 }
 .refresh-icon:hover, .reply-icon:hover{
   color: #59d759;
@@ -64,7 +64,7 @@ h1{
   color: #278a27;
 }
 
-.inbox{ 
+.inbox{
   height: 350px;
   width: 37%;
   background-color: rgb(255, 247, 236);
@@ -89,7 +89,7 @@ h1{
   flex-direction: column;
   justify-content: center;  /* Aligns child elements horizontally (left and right) */
   align-items: center;      /* Aligns child elements vertically (up and down) */
-  
+
   border: 3px dashed orangered;
 }
 
@@ -97,19 +97,6 @@ h1{
   height: 90%;
   width: 90%;
   border: 3px dashed blue;
-}
-
-::-webkit-scrollbar {   /* extra playing around with pseudo selectors on the scroll bar*/
-  width: 14px; 
-  background-color: #fde8cf; 
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #d08fdb; 
-  border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: #ffbdad; 
 }
 
 
@@ -138,11 +125,11 @@ h1{
 
 .drawing-space{
   font-size: 2em;
-  font-weight: normal; 
-  position: relative; 
+  font-weight: normal;
+  position: relative;
 }
 
-.reply-icon{  
+.reply-icon{
   font-size: 1.4em;
   border: 3px dashed lightcoral;
   position: absolute;
