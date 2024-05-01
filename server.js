@@ -108,13 +108,16 @@ app.get('/my-listings', (req, res) => {
 
 
 
-//internal libraries from Tinyapp
+/*  -------------- old resources from Tinyapp - safe to remove --------------
+
+
 const helper = require('./resources/functions');
 const database = require('./resources/databases');
 
+*/
 
 
-
+/*  ------------------------- OLD ROUTES -  safe to remove ---------------------------
 
 
 
@@ -149,13 +152,6 @@ app.get("/login", (req, res) => {
 
 
 
-
-
-
-
-
-
-
 //Handles the request after pressing LOGIN button
 app.post("/login", (req, res) => {
   const loginEmail = req.body.email;
@@ -175,7 +171,6 @@ app.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/login");
 });
-
 
 //Handles the request after pressing REGISTER button
 app.post("/register", (req, res) => {
@@ -200,7 +195,7 @@ app.post("/register", (req, res) => {
 });
 
 
-
+ */
 
 
 
