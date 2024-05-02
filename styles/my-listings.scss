@@ -70,6 +70,17 @@ textarea {
   background-repeat: no-repeat;
 }
 
+.sold-image {
+
+  box-sizing: border-box;
+  width: 40vw;
+  max-width: 500px;
+  height: 350px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 .product-box {
   padding: 30px 40px;
   display: grid;
