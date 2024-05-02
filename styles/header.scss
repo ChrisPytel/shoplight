@@ -9,7 +9,7 @@
   left: 0px;
   background-color: $primary-color;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
   padding: 0px 60px;
   z-index: 1000;
 }
@@ -28,7 +28,6 @@
 
 .nav-link {
   display: inline;
-  font: 500 1rem "Montserrat", sans-serif;
   color: $secondary-color;
 }
 
