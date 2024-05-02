@@ -1,9 +1,6 @@
 const db = require('../connection');
 
 const searchListings = (options) => {
-  console.log(options);
-  // beginning of check here
-
   // params to give to .query later
   const queryParams = [];
 
@@ -35,10 +32,6 @@ const searchListings = (options) => {
 
   queryString += `
   GROUP BY products.id; `
-
-  console.log("params: ", queryParams);
-  console.log("query: ", queryString);
-  //end of the check here
 
   return db.query(queryString, queryParams)
     .then(data => {
