@@ -1,7 +1,7 @@
 @import 'variables';
 
 .navbar {
-  width: 100vw;
+  width: calc(100vw - 10px);
   height: 100px;
   box-sizing: border-box;
   position: fixed;

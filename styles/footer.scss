@@ -1,7 +1,7 @@
 @import 'variables';
 
 footer {
-  width: 100vw;
+  width: calc(100vw - 10px);
   height: 200px;
   display: inline-flex;
   align-items: center;
