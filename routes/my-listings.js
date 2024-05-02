@@ -11,7 +11,7 @@ const router = express.Router();
 const db = require('../db/connection');
 const myListingsFn = require('../db/queries/getMyListings');
 const addNewListingFn = require('../db/queries/addNewListing');
-const markAsSoldFn = require('../db/queries/markAsSold');
+const markAsSold = require('../db/queries/markAsSold');
 const queryUser = require('../db/queries/getUserByID');
 
 const cookieSession = require('cookie-session');
@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
 
   console.log(req.body);
   Promise.all([displayNamePromise, myListingsProducts, newListing])
-      .then(([displayName, products]) => {
+    .then(([displayName, products]) => {
       const templateVars = {
         cookieStored,
         displayName,
@@ -66,15 +66,12 @@ router.post("/", (req, res) => {
     });
 });
 
-// Handles adding to favourites
-router.post("/sold", (req, res) => {
-  return db
-  .query(`UPDATE products
-  SET is_available = False
-  WHERE products.id = $1;`,
-        [req.body.product_id]) //how do i get the product_id?
+// Handles mark as sold
+router.post("/sold/:productId", (req, res) => {
+  console.log("entered post for product id: ", req.params.productId);
+  markAsSold(req.params.productId)
     .then(data => {
-      return res.redirect("/");
+      return res.redirect("/my-listings");
     })
     .catch(error => {
       throw error;
