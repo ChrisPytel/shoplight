@@ -15,7 +15,7 @@
   // border: 3px dashed limegreen;
 }
 
-.index-splash-logo {                      
+.index-splash-logo {
   position: absolute;
   // super janky solution, polish up later, similar solution to InDesign img frames
   // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
@@ -30,7 +30,7 @@
   // border: 3px dashed rgb(105, 197, 105);
 }
 
-.index-splash-tagline {                    
+.index-splash-tagline {
   position: absolute;
   // super janky solution, polish up later, similar solution to InDesign img frames
   // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
@@ -52,7 +52,7 @@
 }
 
 .index-listings-top-filter {
-  font: 700 0.8rem $primary-font;
+  font: 700 0.85rem $primary-font;
   margin-bottom: 60px;
 }
 
@@ -61,6 +61,7 @@
   border: 1px solid $secondary-color;
   border-radius: 5px;
   padding: 10px 30px;
+  font-weight: 400;
 }
 
 /* Product container styling */
@@ -82,10 +83,17 @@
 .product-image {
   box-sizing: border-box;
   width: 100%;
-  max-width: 500px;
   height: 350px;
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  width: 50%;
 }
 
 .product-box {
@@ -178,7 +186,6 @@
 
 .form-popup label {
   font: 700 1.35rem $primary-font;
-  text-transform: capitalize;
 }
 
 .form-container {
