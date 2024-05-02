@@ -24,13 +24,13 @@ router.get('/', (req, res) => {
   console.log(`Our cookieStored is: `, cookieStored);
 
   if (cookieStored){
-    const displayNamePromise = queryUser.getUserByID(cookieStored);
-    displayNamePromise
+    const displayUserPromise = queryUser.getUserByID(cookieStored);
+    displayUserPromise
     .then((result) => {
-    console.log('Name for signed in user:', result);
+    // console.log('Details for signed in user:', result);
     const templateVars ={
       cookieStored,        //Effectively a bool, representing if a cookie is set
-      displayName: result
+      displayUser: result
     };
     res.render('messages', templateVars);
     return;

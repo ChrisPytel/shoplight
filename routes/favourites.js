@@ -16,14 +16,14 @@ router.use(cookieSession({
 //Renders the favourites page
 router.get('/', (req, res) => {
   const cookieStored = req.session.user_id;
-  const displayNamePromise = queryUser.getUserByID(cookieStored);
+  const displayUserPromise = queryUser.getUserByID(cookieStored);
   const myFavouriteProducts = favouriteProductsFn.getFavourites(cookieStored);
 
-  Promise.all([displayNamePromise, myFavouriteProducts])
-    .then(([displayName, products]) => {
+  Promise.all([displayUserPromise, myFavouriteProducts])
+    .then(([displayUser, products]) => {
       const templateVars = {
         cookieStored,
-        displayName,
+        displayUser,
         listings: products,
       };
       return res.render('favourites.ejs', templateVars);
