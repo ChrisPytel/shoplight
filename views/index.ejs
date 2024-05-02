@@ -34,7 +34,7 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
   <script defer src="/scripts/product-filter.js"></script>
-  <script defer src="/scripts/carousel.js"></script>
+  <script defer src="/scripts/form-toggle.js"></script>
   <script src="https://kit.fontawesome.com/0b658c0bbb.js" crossorigin="anonymous"></script>
 </head>
 
@@ -54,19 +54,41 @@
         <% for (let featured of listings) { %>
           <% if (featured.is_featured === true) { %>
             <div class="product-container">
-              <div class="product-image" style="background-image:url('<%= featured.photo_url %>')"></div>
+              <div class="product-image" style="background-image:url(<%=featured.photo_url%>)">
+                <% if (!featured.is_available) { %>
+                  <img
+                    src="https://png.pngtree.com/png-clipart/20230423/ourmid/pngtree-sold-rubber-stamp-png-image_6718966.png"
+                    class="sold-image">
+                  <% } %>
+              </div>
               <div class="product-box">
                 <div class="product-name"><%= featured.name %></div>
                 <div class="product-price">$ <%= featured.price %></div>
                 <div class="product-description"><%= featured.description %></div>
+
                 <div class="product-icons">
-                  <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
+                  <div class="in-stock">
+                    <% if (featured.is_available) { %>
+                      <i class="fa-solid fa-circle-check"></i>
+                    <% } %>
+                  </div>
+
                   <div class="message-seller">
-                    <a href="/messages">
+                    <button class="open-button" onclick="toggleForm()">
                       <i class="fa-regular fa-envelope"></i>
                       <i class="fa-solid fa-envelope"></i>
-                    </a>
+                    </button>
+                    <div class="form-popup" id="myForm">
+                      <form action="/messages" method="post" class="form-container" onsubmit="submitMyForm()">
+                        <label for="message-to-seller">Send message to <%= displayName %></label>
+                        <input type="text" id="sendMessage" placeholder="Say hello!" name="text" required>
+                        <input type="hidden" name="product_id" value="<%= featured.id %>">
+                        <input type="hidden" name="user_id_to" value="<%= featured.user_id %>">
+                        <button type="submit" class="button-flash" id="sendMessageButton">Send</button>
+                    </form>
+                    </div>
                   </div>
+
                   <div class="add-favorite">
                     <form action="/add-to-favorites" method="post">
                       <button type="submit">
@@ -102,19 +124,31 @@
     <div class="product-listings-container">
       <% for (let listing of listings) { %>
       <div class="product-container">
-        <div class="product-image" style="background-image:url('<%= listing.photo_url %>')"></div>
+        <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
+          <% if (!listing.is_available) { %>
+            <img
+              src="https://png.pngtree.com/png-clipart/20230423/ourmid/pngtree-sold-rubber-stamp-png-image_6718966.png"
+              class="sold-image">
+            <% } %>
+        </div>
         <div class="product-box">
           <div class="product-name"><%= listing.name %></div>
           <div class="product-price">$  <%= listing.price %></div>
           <div class="product-description"><%= listing.description %></div>
           <div class="product-icons">
-            <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="in-stock">
+              <% if (listing.is_available) { %>
+                <i class="fa-solid fa-circle-check"></i>
+              <% } %>
+            </div>
+
             <div class="message-seller">
-              <a href="/messages">
+              <button class="open-button">
                 <i class="fa-regular fa-envelope"></i>
                 <i class="fa-solid fa-envelope"></i>
-              </a>
+              </button>
             </div>
+
             <div class="add-favorite">
               <form action="/add-to-favorites" method="post">
                 <button type="submit">
@@ -124,7 +158,7 @@
               </div>
           </div>
         </div>
-      </div> 
+      </div>
       <% } %>
     </div>
 
