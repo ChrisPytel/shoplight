@@ -1,0 +1,61 @@
+@import 'variables';
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgb(235, 184, 88) 0%,
+    rgb(219, 190, 163) 20%,
+    rgb(219, 178, 163) 34%,
+    rgb(235, 178, 201) 59%,
+    rgb(244, 211, 162) 74%,
+    rgb(255, 194, 153) 100%
+  );
+}
+
+
+h3{
+  font: 600 2rem "Syne", sans-serif;
+  color: $accent-color;
+}
+
+
+
+#email, #password{
+  background-color: rgba(0, 0, 0, 0);
+  // border: none;     /* disables the default border style*/
+  resize: none;        /* disables the little corner expansion option */
+  outline: none;       /* disables the outline box when writing */
+  border-radius: 7px;
+  border: 2px solid black;
+  color: inherit;
+  font-weight: bold;
+  font-size: 1.3em;
+  width: 100%;
+  padding: 0 30px;
+  height: 50px;
+}
+
+.btn{
+  background: #d08fdb;
+  color: white;
+  width: 7em;
+  height: 3em;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin: 20px;
+  border: none;
+  border-radius: 0.5em;
+}
+
+ .btn:hover{
+  background: #ffbdad;
+  color: #ffffff;
+  transition: all 0.2s ease-in;
+}
