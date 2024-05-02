@@ -50,6 +50,10 @@ router.post("/", (req, res) => {
   const myListingsProducts = myListingsFn.getMyListings(cookieStored);
   const newListing = addNewListingFn.addNewListing(cookieStored, req.body.name, req.body.description, req.body.photo_url, req.body.price);
 
+  if (!cookieStored) {
+    return res.redirect("/login");
+  }
+
   console.log(req.body);
   Promise.all([displayNamePromise, myListingsProducts, newListing])
     .then(([displayName, products]) => {
