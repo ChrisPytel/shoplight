@@ -24,10 +24,10 @@
 
       <% } else { %>    <!-- If user is logged in with a cookie stored, display username and button for logout -->
 
-        <a class="nav-link" href="/search">Search</a>
-        <a class="nav-link" href="/my-listings">My Listings</a>
-        <a class="nav-link" href="/favourites">Favourites</a>
-        <a class="nav-link" href="/messages">Messages</a>
+        <a class="nav-link nav-search" href="/search" alt="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a class="nav-link nav-listings" href="/my-listings" alt="My Listings"><i class="fa-regular fa-rectangle-list"></i></a>
+        <a class="nav-link nav-favourites" href="/favourites" alt="My Favourites"><i class="fa-regular fa-heart"></i></a>
+        <a class="nav-link nav-messages" href="/messages" alt="My messages"><i class="fa-regular fa-comments"></i></a>
 
         <a class="nav-link logged-in-as"><b>Logged in as:</b> <%= displayName %></a>
         <a class="nav-link community"><b>Community:</b> Toronto Beaches</a>
