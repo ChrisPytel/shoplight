@@ -62,7 +62,7 @@ $(document).ready(function() {
         // Creates an event listener on the DOM to target THIS particular inbox item
         $(`.inbox-id-${id}`).on('click', function(){                     
           console.log(`Selected Inbox item #${id}!`);
-          toggleReadStatus(id, mailObjects[i]);
+          toggleReadStatusVisibility(id, mailObjects[i]);
           markAsOpened(id, mailObjects[i]);
           $('.outgoing').empty();
           const message = renderMessage(mailObjects[i], id);                             // Creates our message markup and appends it to the drawing-space  
@@ -169,21 +169,18 @@ $(document).ready(function() {
 
   // ---------------------------- Modular Functions ----------------------------
 
-
-
-  const toggleReadStatus = function(inboxID) {
-    console.log(`Selected inboxID: `, inboxID);
+  //If a inbox item is unread, this updates the UI
+  const toggleReadStatusVisibility = function(inboxID) {
+    console.log(`Toggle unread->opened on inboxID: `, inboxID);
     $(`.read-status-unread-${inboxID}`).remove();      
-    $(`.read-status-opened-${inboxID}`).addClass('is-visible');    
-
+    $(`.read-status-opened-${inboxID}`).addClass('is-visible'); 
   };
 
-
-
+  //If a inbox item is unread, this POSTS to the DB that its been opened
   const markAsOpened = function(inboxID, messageID) {    
     console.log(`Marking as opened! Our inboxID:`, inboxID, `and messageID:`, messageID);
-
-
+    
+    //Reminder - Connect this func to the route that POSTS to database to update the read_status
   };
 
 
