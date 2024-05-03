@@ -78,6 +78,7 @@
   width: calc(33vw - 120px);
   background-color: $primary-color;
   border: 1px solid $border-color;
+  max-width: 500px;
 }
 
 .product-image {
@@ -86,6 +87,7 @@
   height: 350px;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -206,7 +208,6 @@
   border-radius: 5px;
 }
 
-/* Set a style for the submit/login button */
 .form-container .button-flash {
   background-color: $yellow;
   color: white;
@@ -268,7 +269,7 @@
 .featured-product-listings-container > .product-container {
   box-sizing: border-box;
   width: calc(50vw - 150px);
-  /* max-width: 600px; */
+  max-width: 600px;
   background-color: $primary-color;
   border: 1px solid $border-color;
   scroll-snap-align: start;
