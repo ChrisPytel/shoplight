@@ -48,7 +48,7 @@
 .index-featured, .index-listings {
   width: calc(100vw - 10px);
   box-sizing: border-box;
-  padding: 60px 120px;
+  padding: 60px 120px 0px 120px;
 }
 
 .index-listings-top-filter {
@@ -273,13 +273,6 @@
   border: 1px solid $border-color;
   scroll-snap-align: start;
   flex-shrink: 0;
-}
-
-
-//temporarily disables sideways scrolling on scrollbar as a presentation precaution
-//NOTE - doesnt resolve the issue of listings not wrapping within the boundaries of screen width
-html {
-  overflow-x: hidden;
 }
 
 
