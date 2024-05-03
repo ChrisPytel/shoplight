@@ -8,14 +8,17 @@ $(document).ready(function() {
   //Event listener to kickoff chain of fetchingMail from DB
   $('.refresh-icon').on('click', function(){
     console.log(`Refreshed Inbox!`);
-    $('.drawing-space').empty();
-    $('.outgoing').empty();
-    fetchMail();   
+    beginMailLoading();
   });
   
-  // fetchMail(); //uncomment do have DOM initialize the fetchMail sequence on its own
-
-  const fetchMail = () => {
+  const beginMailLoading = function() {
+    $('.drawing-space').empty();
+    $('.outgoing').empty();
+    msgTypewriter("Select an inbox item on the left to begin.", '.drawing-space'); //typewriter
+    fetchMailFromDB(); //uncomment do have DOM initialize the fetchMailFromDB sequence on its own when page loads
+  };
+  
+  const fetchMailFromDB = () => {
     $.ajax({
       url: `/api/messages`,
       method: 'GET',  // HTTP methods are: 'GET', 'POST', 'PUT', 'DELETE'
@@ -28,7 +31,6 @@ $(document).ready(function() {
       }  
     });   
   };  
-  
   
   
   //1st in the chain
@@ -67,8 +69,8 @@ $(document).ready(function() {
     }    
   };
 
-   //Creates the HTML markup to be appended later to the HTML
-    const createInboxEntry = function(message, id) {
+  //2nd in the chain
+  const createInboxEntry = function(message, id) {
     console.log(`Inbox item #${id} contains: `, message); 
     const readableDate = sqlDateConversion(message.date_sent)
     let readStatus = "Unread";
@@ -79,73 +81,87 @@ $(document).ready(function() {
     <article class ="inbox-entry inbox-id-${id}">
       <div>
         <h4>Message from ${xssSanitize(message.from)}</h4>
-        <p>Re: ${xssSanitize(message.listing)}</p>
+        <p class="re-listing">Re: ${xssSanitize(message.listing)}</p>
       </div>
       <div>
-        <h4>Sent on: ${readableDate}</h4>
-        <p class = "read-status-${id}">${readStatus}</p>
+        <p class ="sent-on"><b>Sent on:</b> ${readableDate}</p>
+        <p class ="read-status read-status-${id}">${readStatus}</p>
       </div>
     </article>
     `);    
   };
 
+  //3rd in the chain, after clicking inbox item
   const renderMessage = function(message, id) {
-      console.log(`Our renderMessage is:\n`, message.message, `\nFor inbox-item #${id}`); 
-      if (!message.message) { //In the event message is undefined
-        return $(`
-          <div>
-            <p>Internal Server Error 500, Error in getting message from inbox</p>
-          </div>
-        `);
-      }else {
-        return $(`
-        <div>
-          <p>${xssSanitize(message.message)}</p>
-        </div>
-        <div class= "reply-icon">
-          <i class="fa-solid fa-reply"></i>
-          <p>Reply</p>
-        </div>
-      `);
-      }
-    };
-
-    const createReplyForm = function(message, id) {
-      // Function code goes here
-      console.log(`Created markup for form corresponding to inbox item # ${id}`); 
-      console.log(`Our reply target is: `, message.from);
-
+    console.log(`Our renderMessage is:\n`, message.message, `\nFor inbox-item #${id}`); 
+    if (!message.message) { //In the event message is undefined
       return $(`
-      <section class = "outgoing">
-        <div class = "reply-form-container form-${id}">
-          <form class="reply-form" method="POST" action="/messages">
-            <p>Replying to <b>${xssSanitize(message.from)}</b> </p>
-            <textarea placeholder="My Reply..." name="text" type="text" class="textarea"></textarea>
-            <input type="hidden" id="reply_from" name="user_id_from" value="${message.user_id_to}">
-            <input type="hidden" id="reply_to" name="user_id_to" value="${message.user_id_from}">
-            <input type="hidden" id="listing" name="product_id" value="${message.product_id}">
-            <button type="submit" class="send-button">Send</button>
-          </form>
+        <div>
+          <p>Internal Server Error 500, Error in getting message from inbox</p>
         </div>
-      </section>
       `);
-    };
+    }else {
+      return $(`
+      <div>
+        <p>${xssSanitize(message.message)}</p>
+      </div>
+      <div class= "reply-icon">
+        <i class="fa-solid fa-reply"></i>
+        <p>Reply</p>
+      </div>
+    `);
+    }
+  };
+
+  //4th in the chain, after clicking reply button
+  const createReplyForm = function(message, id) {
+    console.log(`Created markup for form corresponding to inbox item # ${id}`); 
+    console.log(`Our reply target is: `, message.from);
+
+    return $(`
+    <section class = "outgoing">
+      <div class = "reply-form-container form-${id}">
+        <form class="reply-form" method="POST" action="/messages">
+          <p>Replying to <b>${xssSanitize(message.from)}</b> </p>
+          <textarea placeholder="My Reply..." name="text" type="text" class="textarea"></textarea>
+          <input type="hidden" id="reply_from" name="user_id_from" value="${message.user_id_to}">
+          <input type="hidden" id="reply_to" name="user_id_to" value="${message.user_id_from}">
+          <input type="hidden" id="listing" name="product_id" value="${message.product_id}">
+          <button type="submit" class="send-button">Send</button>
+        </form>
+      </div>
+    </section>
+    `);
+  };
  
 
-  /* Pseudocode for taclking message rendering and form population */
-  
-  // target the drawing space
-  // paste the message into the drawing space, restructure into function to create markup for the message renderer
-  // clear the message after the event listener has been pressed again
-  //
-  // render our reply button with dynamic ID
-  // render our form, pass in ID to post to our DB
-  // If the reply button is pressed, use css to reveal the hidden form
 
 
+
+  // beginMailLoading(); //uncomment do have DOM initialize the fetchMailFromDB sequence on its own when page loads
 
 
   // ---------------------------- Modular Functions ----------------------------
+
+  const msgTypewriter = function(message, targetElement) {
+    let initialDelay = 1500; //delay before writing begins
+    let writeSpeed = 50;
+
+    let typeWriterString = ' ';
+
+    for (let i = 0; i < message.length; i++) {
+      setTimeout(() => {
+        $(`${targetElement}`).empty();
+        typeWriterString = typeWriterString + message[i];
+        $(`${targetElement}`).append(`<p class="faded">${typeWriterString}</p>`);
+          // console.log(`Our typeWriterString is: `, typeWriterString);
+      }, initialDelay);
+      initialDelay = initialDelay + writeSpeed;
+    }
+  };
+
+
+
   //My version of the XSS escape function
   const xssSanitize = function(string) {
     const cleanString = string.replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -178,3 +194,17 @@ $(document).ready(function() {
 
 
 }); // --------- end of $(document).ready ---------
+
+
+
+
+  /* Pseudocode with Jake for tackling message rendering and form population 
+  
+  target the drawing space
+  paste the message into the drawing space, restructure into function to create markup for the message renderer
+  clear the message after the event listener has been pressed again
+  
+  render our reply button with dynamic ID
+  render our form, pass in ID to post to our DB
+  If the reply button is pressed, use css to reveal the hidden form
+  */
