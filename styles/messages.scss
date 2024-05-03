@@ -228,18 +228,19 @@ h1{
   position:relative;
 }
 
-.reply-form p{
-  margin: 20px;
+.replying-to{
+  padding: 30px;
 }
+
 
 .textarea{
   background-color: rgba(0, 0, 0, 0);
-  // border: none;     /* disables the default border style*/
+  border: none;     /* disables the default border style*/
   resize: none;        /* disables the little corner expansion option */
   outline: none;       /* disables the outline box when writing */
   // border: 3px dashed limegreen;
   color: #4056A1;
-  font-size: 1.3em;
+  font-size: 2em;
   width: 100%;
   padding: 0 30px;
   height: 60%;

@@ -138,7 +138,7 @@ $(document).ready(function() {
     <section class = "outgoing">
       <div class = "reply-form-container form-${id}">
         <form class="reply-form" method="POST" action="/messages">
-          <p>Replying to <b>${xssSanitize(message.from)}</b> </p>
+          <p class="replying-to">Replying to <b>${xssSanitize(message.from)}</b> </p>
           <textarea placeholder="My Reply..." name="text" type="text" class="textarea"></textarea>
           <input type="hidden" id="reply_from" name="user_id_from" value="${message.user_id_to}">
           <input type="hidden" id="reply_to" name="user_id_to" value="${message.user_id_from}">
