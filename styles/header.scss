@@ -9,7 +9,7 @@
   left: 0px;
   background-color: $primary-color;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   padding: 0px 60px;
   z-index: 1000;
 }
@@ -22,13 +22,52 @@
 .nav-right {
   display: inline-flex;
   align-items: center;
-  font: 500 1rem "Montserrat", sans-serif;
+  font: 500 0.9rem "Montserrat", sans-serif;
   color: $secondary-color;
+  justify-self: end;
+  column-gap: 10px;
 }
 
 .nav-link {
   display: inline;
   color: $secondary-color;
+}
+
+.nav-search i, .nav-listings i, .nav-favourites i, .nav-messages i {
+  transition: opacity 0.3s ease;
+}
+
+.nav-search:hover i, .nav-listings:hover i, .nav-favourites:hover i, .nav-messages:hover i {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.nav-search:before, .nav-listings:before, .nav-favourites:before, .nav-messages:before {
+  content: '';
+  display: inline-block;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.nav-search:hover:before, .nav-listings:hover:before, .nav-favourites:hover:before, .nav-messages:hover:before {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-search:hover:before {
+  content: 'Search';
+}
+
+.nav-listings:hover:before {
+  content: 'My Listings';
+}
+
+.nav-favourites:hover:before {
+  content: 'My Favourites';
+}
+
+.nav-messages:hover:before {
+  content: 'My Messages';
 }
 
 .logout-button{
@@ -37,7 +76,7 @@
   border-radius: 5px;
   padding: 10px 30px;
   font: 400 0.85rem $primary-font;
-  margin-left: 60px;
+  margin-left: 20px;
 }
 
 .logout-button:hover{
