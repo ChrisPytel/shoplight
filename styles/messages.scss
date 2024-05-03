@@ -62,7 +62,7 @@ h1{
   width: 37%;
   background-color: rgb(255, 247, 236);
   width: 100%;
-  
+
   // overflow: hidden; // just masks child elements
   overflow: scroll;    // applies scrolling of child elements within parent div
   overflow-x: hidden;   // hides horizontal scroll UI
@@ -72,7 +72,7 @@ h1{
 }
 
 .open-inbox{
-  background: #d08fdb;
+  background: $lilac;
   color: white;
   font-size: 1.2em;
   padding: 0.5em 1em;
@@ -137,7 +137,7 @@ h1{
 }
 
 .inbox-entry:active{
-  box-shadow: 5px 5px #d08fdb;
+  box-shadow: 5px 5px $lilac;
 }
 
 .inbox-left{
@@ -163,7 +163,7 @@ h1{
 }
 
 .read-status{
-  font: 500 1em $primary-font;  
+  font: 500 1em $primary-font;
 }
 
 .read-status i{
@@ -222,7 +222,7 @@ h1{
   flex-direction: column;
   justify-content: center;  /* Aligns child elements horizontally (left and right) */
   align-items: center;      /* Aligns child elements vertically (up and down) */
-  opacity: 0.5;  
+  opacity: 0.5;
   // border: 3px dashed orangered;
   word-wrap: break-word;
 }
@@ -237,7 +237,7 @@ h1{
 }
 
 .faded{
-  opacity: 0.5;  
+  opacity: 0.5;
 }
 
 .render-sender{
@@ -293,7 +293,7 @@ h1{
 }
 
 .reply-form button{
-  background: #d08fdb;
+  background: $lilac;
   color: white;
   font-size: 1.2em;
   padding: 0.5em 1em;

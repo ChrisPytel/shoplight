@@ -36,9 +36,10 @@ h1 {
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #d08fdb;
+  background-color: $lilac;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: #ffbdad;
 }
+
