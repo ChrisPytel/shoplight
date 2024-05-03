@@ -1,7 +1,7 @@
 @import 'variables';
 
 .navbar {
-  width: 100vw;
+  width: calc(100vw - 10px);
   height: 100px;
   box-sizing: border-box;
   position: fixed;
@@ -9,7 +9,7 @@
   left: 0px;
   background-color: $primary-color;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   padding: 0px 60px;
   z-index: 1000;
 }
@@ -22,30 +22,65 @@
 .nav-right {
   display: inline-flex;
   align-items: center;
-  font: 500 1rem "Montserrat", sans-serif;
+  font: 500 0.9rem "Montserrat", sans-serif;
   color: $secondary-color;
+  justify-self: end;
+  column-gap: 10px;
 }
 
 .nav-link {
   display: inline;
-  font: 500 1rem "Montserrat", sans-serif;
   color: $secondary-color;
 }
 
+.nav-search i, .nav-listings i, .nav-favourites i, .nav-messages i {
+  transition: opacity 0.3s ease;
+}
+
+.nav-search:hover i, .nav-listings:hover i, .nav-favourites:hover i, .nav-messages:hover i {
+  display: none;
+}
+
+.nav-search:before, .nav-listings:before, .nav-favourites:before, .nav-messages:before {
+  content: '';
+  display: inline-block;
+}
+
+.nav-search:hover:before, .nav-listings:hover:before, .nav-favourites:hover:before, .nav-messages:hover:before {
+  transform: translateX(0);
+}
+
+.nav-search:hover:before {
+  content: 'Search';
+}
+
+.nav-listings:hover:before {
+  content: 'My Listings';
+}
+
+.nav-favourites:hover:before {
+  content: 'My Favourites';
+}
+
+.nav-messages:hover:before {
+  content: 'My Messages';
+}
 
 .logout-button{
   background: #d08fdb;
   color: white;
-  font-size: 1.2em;
-  padding: 0.5em 1em;
-  margin: 20px;
-  border: none;
-  border-radius: 0.5em;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font: 400 0.85rem $primary-font;
+  margin-left: 20px;
 }
+
 .logout-button:hover{
   background: #ffbdad;
   color: #ffffff;
   transition: all 0.2s ease-in;
+  animation: buttonFlash 3s infinite;
+  cursor: pointer;
 }
 
 button{

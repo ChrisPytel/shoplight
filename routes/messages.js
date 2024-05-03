@@ -19,7 +19,7 @@ router.use(cookieSession({
 }));
 
 //Renders the messages page
-router.get('/', (req, res) => {  
+router.get('/', (req, res) => {
   console.log("GET messages entered");
   const cookieStored = req.session.user_id;
   console.log(`Our cookieStored is: `, cookieStored);
@@ -45,11 +45,16 @@ router.get('/', (req, res) => {
     res.redirect('/');
     return;
   }
-}); 
+});
 
 //Handles any post requests on messages
   router.post("/", (req, res) => {
+    const cookieStored = req.session.user_id;
+    console.log(cookieStored);
+    console.log(typeof cookieStored);
+
     console.log("Entered the post route for sending replies to DB WOW!");
+    console.log(req.body);
     console.log(`Reply TEXT: `, req.body.text);
     console.log(`Reply TO userID#: `, req.body.user_id_to);
     console.log(`Reply FROM userID#: `, req.body.user_id_from);

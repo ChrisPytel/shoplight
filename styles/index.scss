@@ -1,7 +1,7 @@
 @import 'variables';
 
 .index-splash {
-  width: 100vw;
+  width: calc(100vw - 10px);
   height: 100vh;
   padding: 220px 120px 120px 120px;
   // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
@@ -15,7 +15,7 @@
   // border: 3px dashed limegreen;
 }
 
-.index-splash-logo {                      
+.index-splash-logo {
   position: absolute;
   // super janky solution, polish up later, similar solution to InDesign img frames
   // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
@@ -30,7 +30,7 @@
   // border: 3px dashed rgb(105, 197, 105);
 }
 
-.index-splash-tagline {                    
+.index-splash-tagline {
   position: absolute;
   // super janky solution, polish up later, similar solution to InDesign img frames
   // if image doesnt load, upload it to another filesharing website like imgbox or imgur and relink below
@@ -46,9 +46,22 @@
 }
 
 .index-featured, .index-listings {
-  width: 100vw;
+  width: calc(100vw - 10px);
   box-sizing: border-box;
-  padding: 60px 120px;
+  padding: 60px 120px 0px 120px;
+}
+
+.index-listings-top-filter {
+  font: 700 0.85rem $primary-font;
+  margin-bottom: 60px;
+}
+
+.index-listings-top-filter select {
+  background-color: $primary-color;
+  border: 1px solid $secondary-color;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-weight: 400;
 }
 
 /* Product container styling */
@@ -62,26 +75,34 @@
 
 .product-container {
   box-sizing: border-box;
-  width: calc(40vw + 2px);
-  max-width: 502px;
+  width: calc(33vw - 120px);
   background-color: $primary-color;
   border: 1px solid $border-color;
+  max-width: 500px;
 }
 
 .product-image {
   box-sizing: border-box;
-  width: 40vw;
-  max-width: 500px;
+  width: 100%;
   height: 350px;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  width: 50%;
 }
 
 .product-box {
   padding: 30px 40px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "name price"
     "description description"
@@ -116,7 +137,7 @@
   justify-content: flex-end;
   column-gap: 15px;
   font-size: 1.5rem;
-  align-self: end;
+  align-self: center;
 }
 
 /* In stock icon styling */
@@ -167,7 +188,6 @@
 
 .form-popup label {
   font: 700 1.35rem $primary-font;
-  text-transform: capitalize;
 }
 
 .form-container {
@@ -188,7 +208,6 @@
   border-radius: 5px;
 }
 
-/* Set a style for the submit/login button */
 .form-container .button-flash {
   background-color: $yellow;
   color: white;
@@ -216,7 +235,8 @@
 
 /* Add favorite styling */
 .add-favorite button {
-  all: unset
+  all: unset;
+  color: $red;
 }
 
 .add-favorite .fa-solid {
@@ -247,15 +267,13 @@
 }
 
 .featured-product-listings-container > .product-container {
+  box-sizing: border-box;
+  width: calc(50vw - 150px);
+  max-width: 600px;
+  background-color: $primary-color;
+  border: 1px solid $border-color;
   scroll-snap-align: start;
   flex-shrink: 0;
-}
-
-
-//temporarily disables sideways scrolling on scrollbar as a presentation precaution
-//NOTE - doesnt resolve the issue of listings not wrapping within the boundaries of screen width
-html {
-  overflow-x: hidden;
 }
 
 

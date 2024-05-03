@@ -21,6 +21,10 @@ body {
   background-position: top;
 }
 
+a:hover {
+  color: $accent-color;
+}
+
 h1 {
   font: 600 3rem "Syne", sans-serif;
   color: $accent-color;

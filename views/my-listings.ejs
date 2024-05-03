@@ -4,9 +4,9 @@
 <head>
   <title>My Listings</title>
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
@@ -16,116 +16,100 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/my-listings.js"></script>
 
-   <!-- Bootstrap CSS -->
-   <link
-   rel="stylesheet"
-   href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-   integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-   crossorigin="anonymous"/>
- 
-   <!-- Pre-installed CSS -->
-   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-   <link rel="stylesheet" href="/vendor/border-box.css" />
- 
-   <!-- Custom CSS -->
-   <link rel="stylesheet" href="/styles/main.css" />
-   <link rel="stylesheet" href="/styles/layout.css" />
-   <link rel="stylesheet" href="/styles/header.css" />
-   <link rel="stylesheet" href="/styles/index.css" />
-   <link rel="stylesheet" href="/styles/footer.css" />
-   <link rel="stylesheet" href="/styles/my-listings.css" />
- 
-   <!-- Google Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
- 
-   <script src="/vendor/jquery-3.0.0.js"></script>
-   <script defer src="/scripts/app.js"></script>
-   <script src="https://kit.fontawesome.com/0b658c0bbb.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous" />
+
+  <!-- Pre-installed CSS -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/footer.css" />
+  <link rel="stylesheet" href="/styles/my-listings.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap"
+    rel="stylesheet">
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+  <script src="https://kit.fontawesome.com/0b658c0bbb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <%- include('partials/_header') %>
 
-  <!-- "Storefront" banner -->
-  <section class="banner">
-    <div>
-      <!-- Maybe add a photo here, either zombie or stretch option to upload when registering -->
-      <img src="">
-    </div>
-    <br>
-  </section>
-
-  
-  <main>
-    <section class="new-listing-section">
-      <h1>Create a new listing:</h1>
-      <!-- Form for new listing -->
-      <!-- TO DO: rename the name of form inputs to be same as ones from table -->
-      <form method="post" action="/my-listings" class="new-listing-form">
-        <label for="name">Product name:</label>
-        <input name="name" id="name" style="overflow:hidden" placeholder="Name of product"></textarea>
-        <br>
-        <label for="description">Product description:</label>
-        <textarea name="description" id="description" style="overflow:hidden" placeholder="Product description"></textarea>
-        <br>
-        <label for="price">Price ($):</label>
-        <input name="price" id="price" type="number" style="overflow:hidden" placeholder="Price"></textarea>
-        <br>
-        <label for="photo url">Please attach an image URL:</label>
-        <input name="photo_url" id="photo_url" style="overflow:hidden" placeholder="Image URL"></textarea>
-        <br>
-        <button type="submit" class="submit-listing">Create</button>
-      </form>
-    </section>
-    <br>
-    <!-- All existing listings here -->
-    <section class="listings">
-      <h1>My listings:</h1> 
-      <div class="product-listings-container">
-      <% for (const listing of listings) { %>
-        <div class="product-container">
-          <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
-            <% if (listing.is_available === 'f') { %>
-            <img src="https://i.pinimg.com/originals/42/15/f0/4215f05dd3c8913daff1f3ad165d4bde.png" class="product-image">
-            <% } %>
-          </div>
-          <div class="product-box">
-            <div class="product-name"><%=listing.name%></div>
-            <div class="product-price"><%=listing.price%></div>
-            <div class="product-description"><%=listing.description%></div>
-            <div class="product-icons">
-              <form action="/mark-as-sold" method="post">
-                <button type="submit" class="mark-as-sold">
-                  <i class="fa-solid fa-circle-check"></i>
-                </button>
-              <div class="message-seller">
-                <a href="/messages">
-                  <i class="fa-regular fa-envelope"></i>
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
-              </div>
-              <div class="add-favorite">
-                <form action="/add-to-favorites" method="post">
-                  <button type="submit">
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-heart"></i>
-                  </button>
-                </div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="listing">
-          <%=listing.name%> 
-          <%=listing.description%>
-          <img src=<%= listing.photo_url %> class="listing-image">
-        </div> -->
-      <% } %>
+    <!-- "Storefront" banner -->
+    <section class="banner">
+      <div>
+        <!-- Maybe add a photo here, either zombie or stretch option to upload when registering -->
+        <img src="">
       </div>
+      <br>
     </section>
-  </main>
-<%- include('partials/_footer.ejs') %>
+
+
+    <main>
+      <section class="new-listing-section">
+        <h1>Create a new listing:</h1>
+        <!-- Form for new listing -->
+        <!-- TO DO: rename the name of form inputs to be same as ones from table -->
+        <form method="post" action="/my-listings" class="new-listing-form">
+          <label for="name">Product name:</label>
+          <input name="name" id="name" style="overflow:hidden" placeholder="Name of product"></textarea>
+          <br>
+          <label for="description">Product description:</label>
+          <textarea name="description" id="description" style="overflow:hidden"
+            placeholder="Product description"></textarea>
+          <br>
+          <label for="price">Price ($):</label>
+          <input name="price" id="price" type="number" style="overflow:hidden" placeholder="Price"></textarea>
+          <br>
+          <label for="photo url">Please attach an image URL:</label>
+          <input name="photo_url" id="photo_url" style="overflow:hidden" placeholder="Image URL"></textarea>
+          <br>
+          <button type="submit" class="submit-listing">Create</button>
+        </form>
+      </section>
+      <br>
+      <!-- All existing listings here -->
+      <section class="listings">
+        <h1>My listings:</h1>
+        <div class="product-listings-container">
+          <% for (const listing of listings) { %>
+            <div class="product-container">
+              <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
+                <% if (!listing.is_available) { %>
+                  <img
+                    src="https://png.pngtree.com/png-clipart/20230423/ourmid/pngtree-sold-rubber-stamp-png-image_6718966.png"
+                    class="sold-image">
+                  <% } %>
+              </div>
+              <div class="product-box">
+                <div class="product-name">
+                  <%=listing.name%>
+                </div>
+                <div class="product-price">
+                  <%=listing.price%>
+                </div>
+                <div class="product-description">
+                  <%=listing.description%>
+                </div>
+              </div>
+            </div>
+            <% } %>
+        </div>
+      </section>
+    </main>
+    <%- include('partials/_footer.ejs') %>
 
 </body>
 

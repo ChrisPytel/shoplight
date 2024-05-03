@@ -11,6 +11,7 @@ const router = express.Router();
 const db = require('../db/connection');
 const myListingsFn = require('../db/queries/getMyListings');
 const addNewListingFn = require('../db/queries/addNewListing');
+const markAsSold = require('../db/queries/markAsSold');
 const queryUser = require('../db/queries/getUserByID');
 
 const cookieSession = require('cookie-session');
@@ -64,6 +65,18 @@ router.post("/", (req, res) => {
       console.log(err.message);
     });
 });
+
+// Handles mark as sold
+router.post("/sold/:productId", (req, res) => {
+  console.log("entered post for product id: ", req.params.productId);
+  markAsSold(req.params.productId)
+    .then(data => {
+      return res.redirect("/my-listings");
+    })
+    .catch(error => {
+      throw error;
+    });
+})
 
 
 module.exports = router;
