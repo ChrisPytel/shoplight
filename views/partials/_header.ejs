@@ -8,6 +8,8 @@
 
     <div class="nav-right">
 
+      <a class="nav-link nav-search" href="/search" alt="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+
       <% if (!cookieStored) { %>    <!-- If user cookie isnt stored as a logged in account, display options -->
 
       <a class="nav-item">
@@ -24,7 +26,6 @@
 
       <% } else { %>    <!-- If user is logged in with a cookie stored, display username and button for logout -->
 
-        <a class="nav-link nav-search" href="/search" alt="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
         <a class="nav-link nav-listings" href="/my-listings" alt="My Listings"><i class="fa-regular fa-rectangle-list"></i></a>
         <a class="nav-link nav-favourites" href="/favourites" alt="My Favourites"><i class="fa-regular fa-heart"></i></a>
         <a class="nav-link nav-messages" href="/messages" alt="My messages"><i class="fa-regular fa-comments"></i></a>
