@@ -174,7 +174,7 @@ $(document).ready(function() {
   const toggleReadStatus = function(inboxID) {
     console.log(`Selected inboxID: `, inboxID);
     $(`.read-status-unread-${inboxID}`).remove();      
-    $(`.read-status-opened-${inboxID}`).add('.is-visible').addClass('.is-visible');    
+    $(`.read-status-opened-${inboxID}`).addClass('is-visible');    
 
   };
 

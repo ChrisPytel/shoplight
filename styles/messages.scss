@@ -176,11 +176,11 @@ h1{
 
 .opened{
   color: #ff9393;
-  // visibility: hidden;
+  display: none;
 }
 
-.opened .is-visible{
-  visibility: visible;
+.is-visible{
+  display: block;
 }
 
 @keyframes wobble {
