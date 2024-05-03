@@ -61,17 +61,30 @@
   <main>
     <section class="favourites">
       <h1>My favourites:</h1>
+
       <div class="product-listings-container">
-      <% for (const listing of listings) { %>
-        <div class="product-container">
-          <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
-          <div class="product-box">
-            <div class="product-name"><%=listing.name%></div>
-            <div class="product-price"><%=listing.price%></div>
-            <div class="product-description"><%=listing.description%></div>
+        <% for (const listing of listings) { %>
+          <div class="product-container">
+            <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
+              <% if (!listing.is_available) { %>
+                <img
+                  src="https://png.pngtree.com/png-clipart/20230423/ourmid/pngtree-sold-rubber-stamp-png-image_6718966.png"
+                  class="sold-image">
+                <% } %>
+            </div>
+            <div class="product-box">
+              <div class="product-name">
+                <%=listing.name%>
+              </div>
+              <div class="product-price">
+                <%=listing.price%>
+              </div>
+              <div class="product-description">
+                <%=listing.description%>
+              </div>
+            </div>
           </div>
-        </div>
-      <% } %>
+          <% } %>
       </div>
     </section>
   </main>
