@@ -22,11 +22,11 @@
    href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
    crossorigin="anonymous"/>
- 
+
    <!-- Pre-installed CSS -->
    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
    <link rel="stylesheet" href="/vendor/border-box.css" />
- 
+
    <!-- Custom CSS -->
    <link rel="stylesheet" href="/styles/main.css" />
    <link rel="stylesheet" href="/styles/layout.css" />
@@ -34,12 +34,12 @@
    <link rel="stylesheet" href="/styles/index.css" />
    <link rel="stylesheet" href="/styles/footer.css" />
    <link rel="stylesheet" href="/styles/my-listings.css" />
- 
+
    <!-- Google Fonts -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
- 
+
    <script src="/vendor/jquery-3.0.0.js"></script>
    <script defer src="/scripts/app.js"></script>
    <script src="https://kit.fontawesome.com/0b658c0bbb.js" crossorigin="anonymous"></script>
@@ -57,14 +57,14 @@
     <br>
   </section>
 
-  
+
   <main>
     <section class="favourites">
-      <h1>My favourites:</h1> 
-      <div class="favourite-listings-container">
+      <h1>My favourites:</h1>
+      <div class="product-listings-container">
       <% for (const listing of listings) { %>
         <div class="product-container">
-          <div class="product-image" style="background-image:url(https://placehold.co/350x350)"><img src=<%= listing.photo_url %> class="listing-image"></div>
+          <div class="product-image" style="background-image:url('<%= listing.photo_url %>')" class="listing-image"></div>
           <div class="product-box">
             <div class="product-name"><%=listing.name%></div>
             <div class="product-price"><%=listing.price%></div>
