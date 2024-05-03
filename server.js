@@ -81,6 +81,18 @@ app.use('/add-to-favorites', addNewFavoriteRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!  Separate them into separate routes files (see above).
 
+
+app.get('/', (req, res) => {
+  res.redirect('/products');   //redirecting to /products - GET routing is handled in routes/products-api.js
+});
+
+
+
+
+/*
+   
+
+
 app.get('/', (req, res) => {
   const cookieStored = req.session.user_id;
   const templateVars = {
@@ -91,21 +103,15 @@ app.get('/', (req, res) => {
 });
 
 
-
-app.get('/my-listings', (req, res) => {
-  res.render('my-listings', templateVars);
-});
+*/
 
 
 
+// ----------- now being handled in routes/my-listings.js -----------
 
-
-
-
-
-
-
-
+// app.get('/my-listings', (req, res) => {
+//   res.render('my-listings', templateVars);
+// });
 
 
 

@@ -13,14 +13,14 @@ router.use(cookieSession({
 
 router.get('/', (req, res) => {
   const cookieStored = req.session.user_id;
-  const displayNamePromise = queryUser.getUserByID(cookieStored);   // Retrieve displayName asynchronously
+  const displayUserPromise = queryUser.getUserByID(cookieStored);   // Retrieve displayUser asynchronously
   const searchPromise = searchListingsFn.searchListings(req.body); 
 
-  Promise.all([displayNamePromise, searchPromise])                // Execute both promises concurrently using Promise.all
-      .then(([displayName, products]) => {
+  Promise.all([displayUserPromise, searchPromise])                // Execute both promises concurrently using Promise.all
+      .then(([displayUser, products]) => {
           const templateVars = {
               cookieStored,
-              displayName,
+              displayUser,
               listings: products
           };
           return res.render('search.ejs', templateVars);
@@ -33,14 +33,14 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const cookieStored = req.session.user_id;
-  const displayNamePromise = queryUser.getUserByID(cookieStored);   // Retrieve displayName asynchronously
+  const displayUserPromise = queryUser.getUserByID(cookieStored);   // Retrieve displayUser asynchronously
   const searchPromise = searchListingsFn.searchListings(req.body); 
 
-  Promise.all([displayNamePromise, searchPromise])                // Execute both promises concurrently using Promise.all
-      .then(([displayName, products]) => {
+  Promise.all([displayUserPromise, searchPromise])                // Execute both promises concurrently using Promise.all
+      .then(([displayUser, products]) => {
           const templateVars = {
               cookieStored,
-              displayName,
+              displayUser,
               listings: products
           };
           return res.render('search.ejs', templateVars);

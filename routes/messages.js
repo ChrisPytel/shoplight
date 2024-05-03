@@ -11,6 +11,7 @@ const queryUser = require('../db/queries/getUserByID');
 const postMessage = require('../db/queries/sendMessage');
 
 const cookieSession = require('cookie-session');
+const { getEmailPassword } = require('../db/queries/getEmailPassword');
 router.use(cookieSession({
   name: 'session',
   keys: ['superSecretKey', 'superSecretKey2'], /* secret keys */
@@ -24,13 +25,13 @@ router.get('/', (req, res) => {
   console.log(`Our cookieStored is: `, cookieStored);
 
   if (cookieStored){
-    const displayNamePromise = queryUser.getUserByID(cookieStored);
-    displayNamePromise
+    const displayUserPromise = queryUser.getUserByID(cookieStored);
+    displayUserPromise
     .then((result) => {
-    console.log('Name for signed in user:', result);
+    // console.log('Details for signed in user:', result);
     const templateVars ={
       cookieStored,        //Effectively a bool, representing if a cookie is set
-      displayName: result
+      displayUser: result
     };
     res.render('messages', templateVars);
     return;
@@ -46,7 +47,6 @@ router.get('/', (req, res) => {
   }
 });
 
-
 //Handles any post requests on messages
   router.post("/", (req, res) => {
     const cookieStored = req.session.user_id;
@@ -59,7 +59,17 @@ router.get('/', (req, res) => {
     console.log(`Reply TO userID#: `, req.body.user_id_to);
     console.log(`Reply FROM userID#: `, req.body.user_id_from);
     console.log(`Reply PROD#: `, req.body.product_id);
-    postMessage.sendMessage(req.body.text, req.body.user_id_to, cookieStored, req.body.product_id);
+    postMessage.sendMessage(req.body.text, req.body.user_id_to, req.body.user_id_from, req.body.product_id)
+      .then((message) => {
+      console.log('postMessage Promise Resolved:', message);    
+
+      //POSTING via a standard button on a form will result in page waiting for a response         /* Option A - Do nothing and press escape to prevent timeout */                 
+      // res.status(201).send({server: "Sent message to user", message});                         /* Option B, send a response in the form of a status and an object */    
+      // res.redirect(`/messages`);                                                              /* Option C, redirect */ 
+      })
+      .catch((err) => {
+      console.error('Promise Rejected:', err);
+      });
   });
 
 module.exports = router;

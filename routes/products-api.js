@@ -12,14 +12,15 @@ router.use(cookieSession({
 
 router.get('/', (req, res) => {
   const cookieStored = req.session.user_id;
-  const displayNamePromise = queryUser.getUserByID(cookieStored);   // Retrieve displayName asynchronously
+  const displayUserPromise = queryUser.getUserByID(cookieStored);   // Retrieve displayUser asynchronously
   const productsPromise = db.getProducts();                         // Retrieve products
 
-  Promise.all([displayNamePromise, productsPromise])                // Execute both promises concurrently using Promise.all
-      .then(([displayName, products]) => {
+  Promise.all([displayUserPromise, productsPromise])                // Execute both promises concurrently using Promise.all
+      .then(([displayUser, products]) => {
+        console.log(`Our displayUser is: `, displayUser);
           const templateVars = {
               cookieStored,
-              displayName,
+              displayUser,
               listings: products,
               featured: products.is_featured
           };

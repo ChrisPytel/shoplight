@@ -24,14 +24,14 @@ router.use(cookieSession({
 //Renders the my-listings page
 router.get('/', (req, res) => {
   const cookieStored = req.session.user_id;
-  const displayNamePromise = queryUser.getUserByID(cookieStored);
+  const displayUserPromise = queryUser.getUserByID(cookieStored);
   const myListingsProducts = myListingsFn.getMyListings(cookieStored);
 
-  Promise.all([displayNamePromise, myListingsProducts])
-    .then(([displayName, products]) => {
+  Promise.all([displayUserPromise, myListingsProducts])
+    .then(([displayUser, products]) => {
       const templateVars = {
         cookieStored,
-        displayName,
+        displayUser,
         listings: products,
       };
       return res.render('my-listings.ejs', templateVars);
@@ -46,16 +46,16 @@ router.get('/', (req, res) => {
 //Handles any post requests on my-listings
 router.post("/", (req, res) => {
   const cookieStored = req.session.user_id;
-  const displayNamePromise = queryUser.getUserByID(cookieStored);
+  const displayUserPromise = queryUser.getUserByID(cookieStored);
   const myListingsProducts = myListingsFn.getMyListings(cookieStored);
   const newListing = addNewListingFn.addNewListing(cookieStored, req.body.name, req.body.description, req.body.photo_url, req.body.price);
 
   console.log(req.body);
-  Promise.all([displayNamePromise, myListingsProducts, newListing])
-    .then(([displayName, products]) => {
+  Promise.all([displayUserPromise, myListingsProducts, newListing])
+      .then(([displayUser, products]) => {
       const templateVars = {
         cookieStored,
-        displayName,
+        displayUser,
         listings: products,
       };
       // console.log(templateVars);

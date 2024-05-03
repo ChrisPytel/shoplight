@@ -30,10 +30,11 @@
         <a class="nav-link nav-favourites" href="/favourites" alt="My Favourites"><i class="fa-regular fa-heart"></i></a>
         <a class="nav-link nav-messages" href="/messages" alt="My messages"><i class="fa-regular fa-comments"></i></a>
 
-        <a class="nav-link logged-in-as"><b>Logged in as:</b> <%= displayName %></a>
-        <a class="nav-link community"><b>Community:</b> Toronto Beaches</a>
-        <form method="POST" action="/logout">
-          <button class="logout-button" type="submit">Log Out</button>
+        <a class="nav-link logged-in-as"><b>Logged in as:</b> <%= displayUser.name %></a>
+        <a class="nav-link city"><b>City:</b> <%= displayUser.city %></a>
+        <a class="nav-link community"><b>Community:</b> <%= displayUser.community %></a>
+        <form class="logout-button" method="POST" action="/logout">
+          <button type="submit">Log Out</button>
         </form>
 
       <% } %>
