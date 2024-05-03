@@ -64,7 +64,7 @@
       <div class="product-listings-container">
       <% for (const listing of listings) { %>
         <div class="product-container">
-          <div class="product-image" style="background-image:url('<%= listing.photo_url %>')" class="listing-image"></div>
+          <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
           <div class="product-box">
             <div class="product-name"><%=listing.name%></div>
             <div class="product-price"><%=listing.price%></div>
