@@ -135,7 +135,7 @@
   justify-content: flex-end;
   column-gap: 15px;
   font-size: 1.5rem;
-  align-self: end;
+  align-self: center;
 }
 
 /* In stock icon styling */
@@ -234,7 +234,8 @@
 
 /* Add favorite styling */
 .add-favorite button {
-  all: unset
+  all: unset;
+  color: $red;
 }
 
 .add-favorite .fa-solid {
