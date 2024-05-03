@@ -62,6 +62,7 @@ $(document).ready(function() {
         // Creates an event listener on the DOM to target THIS particular inbox item
         $(`.inbox-id-${id}`).on('click', function(){                     
           console.log(`Selected Inbox item #${id}!`);
+          toggleReadStatus(id, mailObjects[i]);
           markAsOpened(id, mailObjects[i]);
           $('.outgoing').empty();
           const message = renderMessage(mailObjects[i], id);                             // Creates our message markup and appends it to the drawing-space  
@@ -86,10 +87,24 @@ $(document).ready(function() {
   const createInboxEntry = function(message, id) {
     console.log(`Inbox item #${id} contains: `, message); 
     const readableDate = sqlDateConversion(message.date_sent)
-    let readStatus = "Unread";
-      if (message.read_status === true){
-        readStatus === "Opened";
-      } 
+
+
+    if (message.read_status === true){     //Creates an HTML markup depending on the read_status of the inbox item
+      return $(`
+      <article class ="inbox-entry inbox-id-${id}">
+        <div class="inbox-left">
+          <h4 class="inbox-from">Message from ${xssSanitize(message.from)}</h4>
+          <p class="re-listing">Re: ${xssSanitize(message.listing)}</p>
+        </div>
+        <div class="inbox-right">
+          <p class="sent-on"><b>Sent on:</b> ${readableDate}</p>
+          <p class="read-status opened read-status-opened-${id} is-visible"> <i class="fa-regular fa-envelope-open"></i> Opened</p>
+        </div>
+      </article>
+      `); 
+    }
+
+    else if(message.read_status === false){
     return $(`
     <article class ="inbox-entry inbox-id-${id}">
       <div class="inbox-left">
@@ -98,12 +113,12 @@ $(document).ready(function() {
       </div>
       <div class="inbox-right">
         <p class="sent-on"><b>Sent on:</b> ${readableDate}</p>
-        <p class="read-status read-status-${id}">${readStatus}</p>
-        <i class="fa-solid fa-envelope"></i>
-        <i class="fa-regular fa-envelope-open"></i>
+        <p class="read-status unread read-status-unread-${id} "> <i class="fa-solid fa-envelope look-at-me"></i> <b> Unread Message </b></p>
+        <p class="read-status opened read-status-opened-${id} "> <i class="fa-regular fa-envelope-open"></i> Opened</p>
       </div>
     </article>
-    `);    
+    `);  
+    }   
   };
 
   //3rd in the chain, after clicking inbox item
@@ -152,12 +167,16 @@ $(document).ready(function() {
  
 
 
-
-
-  // beginMailLoading(); //uncomment do have DOM initialize the fetchMailFromDB sequence on its own when page loads
-
-
   // ---------------------------- Modular Functions ----------------------------
+
+
+
+  const toggleReadStatus = function(inboxID) {
+    console.log(`Selected inboxID: `, inboxID);
+    $(`.read-status-unread-${inboxID}`).remove();      
+    $(`.read-status-opened-${inboxID}`).add('.is-visible').addClass('.is-visible');    
+
+  };
 
 
 
@@ -166,9 +185,6 @@ $(document).ready(function() {
 
 
   };
-
-
-
 
 
   const msgTypewriter = function(message, targetElement) {
@@ -187,8 +203,6 @@ $(document).ready(function() {
       initialDelay = initialDelay + writeSpeed;
     }
   };
-
-
 
   //My version of the XSS escape function
   const xssSanitize = function(string) {
@@ -219,6 +233,11 @@ $(document).ready(function() {
     return `${year}-${month}-${day} at ${hours}:${minutes} ${suffix}`;    
   };
 
+
+
+  // --------------- initialization ---------------
+
+  // beginMailLoading(); //uncomment do have DOM initialize the fetchMailFromDB sequence on its own when page loads
 
 
 }); // --------- end of $(document).ready ---------
