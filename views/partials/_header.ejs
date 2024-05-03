@@ -32,8 +32,8 @@
 
         <a class="nav-link logged-in-as"><b>Logged in as:</b> <%= displayName %></a>
         <a class="nav-link community"><b>Community:</b> Toronto Beaches</a>
-        <form class="logout-button" method="POST" action="/logout">
-          <button type="submit">Log Out</button>
+        <form method="POST" action="/logout">
+          <button class="logout-button" type="submit">Log Out</button>
         </form>
 
       <% } %>
