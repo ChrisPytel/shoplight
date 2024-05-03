@@ -5,9 +5,21 @@
 $(document).ready(function() {
   console.log("Successfully loaded jQuery on messages.js script attached to messages.ejs");
     
+
+  //Event listener to kickoff chain of fetchingMail from DB
+  $('.open-inbox').on('click', function(){
+    console.log(`Opening our Inbox!`);
+    $('.open-inbox').remove();
+    $('.refresh-icon').css('visibility', 'visible');
+    $('.message-container').css('opacity', '1');
+    $('.inbox').css('opacity', '1');
+    beginMailLoading();
+  });
+  
+
   //Event listener to kickoff chain of fetchingMail from DB
   $('.refresh-icon').on('click', function(){
-    console.log(`Refreshed Inbox!`);
+    console.log(`Refreshed Inbox.`);
     beginMailLoading();
   });
   
@@ -35,7 +47,7 @@ $(document).ready(function() {
   
   //1st in the chain
   const renderInboxItems = function(mailObjects) {      
-    console.log(`Our mailObjects: `, mailObjects);
+    // console.log(`Our mailObjects: `, mailObjects);
     $('.inbox').empty();                            //Purges any old Inbox Entries from page  
 
     let initialDelay = 0, writeSpeed = 150;  // delay before writing begins, and speed in milliseconds between iterations
@@ -50,6 +62,7 @@ $(document).ready(function() {
         // Creates an event listener on the DOM to target THIS particular inbox item
         $(`.inbox-id-${id}`).on('click', function(){                     
           console.log(`Selected Inbox item #${id}!`);
+          markAsOpened(id, mailObjects[i]);
           $('.outgoing').empty();
           const message = renderMessage(mailObjects[i], id);                             // Creates our message markup and appends it to the drawing-space  
           $('.drawing-space').empty().append(message);                                   // Wipes any old messages from page, appends new one 
@@ -75,17 +88,19 @@ $(document).ready(function() {
     const readableDate = sqlDateConversion(message.date_sent)
     let readStatus = "Unread";
       if (message.read_status === true){
-        readStatus === "Read";
+        readStatus === "Opened";
       } 
     return $(`
     <article class ="inbox-entry inbox-id-${id}">
-      <div>
-        <h4>Message from ${xssSanitize(message.from)}</h4>
+      <div class="inbox-left">
+        <h4 class="inbox-from">Message from ${xssSanitize(message.from)}</h4>
         <p class="re-listing">Re: ${xssSanitize(message.listing)}</p>
       </div>
-      <div>
-        <p class ="sent-on"><b>Sent on:</b> ${readableDate}</p>
-        <p class ="read-status read-status-${id}">${readStatus}</p>
+      <div class="inbox-right">
+        <p class="sent-on"><b>Sent on:</b> ${readableDate}</p>
+        <p class="read-status read-status-${id}">${readStatus}</p>
+        <i class="fa-solid fa-envelope"></i>
+        <i class="fa-regular fa-envelope-open"></i>
       </div>
     </article>
     `);    
@@ -103,7 +118,8 @@ $(document).ready(function() {
     }else {
       return $(`
       <div>
-        <p>${xssSanitize(message.message)}</p>
+      <p class="render-sender">${xssSanitize(message.from)}: </p>
+      <p class="render-message">${xssSanitize(message.message)}</p>
       </div>
       <div class= "reply-icon">
         <i class="fa-solid fa-reply"></i>
@@ -143,6 +159,18 @@ $(document).ready(function() {
 
   // ---------------------------- Modular Functions ----------------------------
 
+
+
+  const markAsOpened = function(inboxID, messageID) {    
+    console.log(`Marking as opened! Our inboxID:`, inboxID, `and messageID:`, messageID);
+
+
+  };
+
+
+
+
+
   const msgTypewriter = function(message, targetElement) {
     let initialDelay = 1500; //delay before writing begins
     let writeSpeed = 50;
@@ -154,7 +182,7 @@ $(document).ready(function() {
         $(`${targetElement}`).empty();
         typeWriterString = typeWriterString + message[i];
         $(`${targetElement}`).append(`<p class="faded">${typeWriterString}</p>`);
-          // console.log(`Our typeWriterString is: `, typeWriterString);
+          console.log(`Typing:`, typeWriterString);
       }, initialDelay);
       initialDelay = initialDelay + writeSpeed;
     }
