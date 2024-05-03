@@ -103,27 +103,6 @@
                 <div class="product-description">
                   <%=listing.description%>
                 </div>
-                <div class="product-icons">
-                  <form action="/my-listings/sold/<%=listing.id%>" method="post">
-                    <button type="submit" class="mark-as-sold">
-                      <i class="fa-solid fa-circle-check"></i>
-                    </button>
-                  </form>
-                    <div class="message-seller">
-                      <a href="/messages">
-                        <i class="fa-regular fa-envelope"></i>
-                        <i class="fa-solid fa-envelope"></i>
-                      </a>
-                    </div>
-                    <div class="add-favorite">
-                      <form action="/add-to-favorites" method="post">
-                        <button type="submit">
-                          <i class="fa-regular fa-heart"></i>
-                          <i class="fa-solid fa-heart"></i>
-                        </button>
-                      </form>
-                    </div>
-                </div>
               </div>
             </div>
             <% } %>
