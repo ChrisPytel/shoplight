@@ -29,12 +29,12 @@ app.use(express.static('public'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 
-//------------------- API route source ------------------- 
+//------------------- API route source -------------------
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const messageApiRoutes = require('./routes/messages-api');
 
-//------------------- Page route source ------------------- 
+//------------------- Page route source -------------------
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
@@ -44,6 +44,7 @@ const searchRoutes = require('./routes/search');
 const productRoutes = require('./routes/products-api');
 const favouritesRoutes = require('./routes/favourites');
 const messagesRoutes = require('./routes/messages');
+const addNewFavoriteRoutes = require('./routes/add-to-favorites');
 
 // Cookies
 const cookieSession = require('cookie-session');
@@ -59,13 +60,13 @@ app.use(cookieSession({
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // Note: mount other resources here, using the same pattern
 
-//------------------- API endpoints ------------------- 
+//------------------- API endpoints -------------------
 app.use('/api/users', userApiRoutes);          //sample route
 app.use('/api/widgets', widgetApiRoutes);      //sample route
 app.use('/api/messages', messageApiRoutes);    //for GET/POST-ing our messages to/from DB
 
 
-//------------------- Page endpoints  ------------------- 
+//------------------- Page endpoints  -------------------
 app.use('/users', usersRoutes);                // sample route
 app.use('/login', loginRoutes);                // GET renders page | POST logs user in + sets cookie
 app.use('/register', registerRoutes);          // GET renders page | POST registers user + sets cookie   <- implement
@@ -75,7 +76,7 @@ app.use('/search', searchRoutes);              // GET renders page
 app.use('/messages', messagesRoutes);          // GET renders page | POST directs ajax query to messages-api
 app.use('/products', productRoutes);           // resolved conflict
 app.use('/favourites', favouritesRoutes);      // resolved conflict
-
+app.use('/add-to-favorites', addNewFavoriteRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!  Separate them into separate routes files (see above).
