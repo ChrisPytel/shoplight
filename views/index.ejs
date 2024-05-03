@@ -88,6 +88,7 @@
                           <input type="text" id="sendMessage" placeholder="Say hello!" name="text" required>
                           <input type="hidden" name="product_id" value="<%= featured.id %>">
                           <input type="hidden" name="user_id_to" value="<%= featured.user_id %>">
+                          <input type="hidden" name="user_id_from" value="<%= featured.cookieStored %>">
                           <button type="submit" class="button-flash" id="sendMessageButton">Send</button>
                         </form>
                       </div>
