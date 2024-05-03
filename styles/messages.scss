@@ -163,8 +163,53 @@ h1{
 }
 
 .read-status{
-  // border: 3px dashed limegreen;  
-  font: 500 1em $primary-font;
+  font: 500 1em $primary-font;  
+}
+
+.read-status i{
+  font-size: 1.5em;
+}
+
+.unread{
+  color: #ad5dbb;
+}
+
+.opened{
+  color: #ff9393;
+  // visibility: hidden;
+}
+
+.opened .is-visible{
+  visibility: visible;
+}
+
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes bouncy {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(-20px);
+  }
+  60% {
+      transform: translateY(-10px);
+  }
+}
+
+.look-at-me{
+  display: inline-block;
+  // size: 12em;
+  // animation: wobble 2s ease-in-out infinite;
+  animation: bouncy 2s ease-in-out infinite;
+  padding-right: 4px;
+
 }
 
 
@@ -253,6 +298,7 @@ h1{
   padding: 0.5em 1em;
   margin: 20px;
   border: none;
+  outline: none;
   border-radius: 0.5em;
   bottom: 0;
   right: 0;
