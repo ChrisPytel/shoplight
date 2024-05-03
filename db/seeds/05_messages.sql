@@ -4,7 +4,7 @@ INSERT INTO messages (message, user_id_to, user_id_from, product_id) VALUES ('Gr
 INSERT INTO messages (message, user_id_to, user_id_from, product_id) VALUES ('When would you like to meet?', 1, 9, 4);
 INSERT INTO messages (message, user_id_to, user_id_from, product_id) VALUES ('Thanks! Looking forward to it.', 2, 8, 5);
 
-INSERT INTO messages (message, user_id_to, user_id_from, product_id, date_sent) VALUES ('I''m interested in this item, let me know if its still available', 1, 7, 2, '2024-01-12 23:59:59');
+INSERT INTO messages (message, user_id_to, user_id_from, product_id, date_sent, read_status) VALUES ('I''m interested in this item, let me know if its still available', 1, 7, 2, '2024-01-12 23:59:59', TRUE);
 INSERT INTO messages (message, user_id_to, user_id_from, product_id, date_sent) VALUES ('How much are you willing to negotiate a drop on this item?', 1, 2, 2, '2024-01-31 23:59:59');
 INSERT INTO messages (message, user_id_to, user_id_from, product_id, date_sent) VALUES ('I''d like to come by to see the item, when are you available?', 1, 8, 5, '2024-02-15 12:00:00');
 INSERT INTO messages (message, user_id_to, user_id_from, product_id, date_sent) VALUES ('I''m interested in this item, let me know if its still available', 1, 2, 5, '2024-03-05 18:30:00');
