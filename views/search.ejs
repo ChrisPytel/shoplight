@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="/styles/index.css" />
   <link rel="stylesheet" href="/styles/footer.css" />
   <link rel="stylesheet" href="/styles/search.css" />
+  <link rel="stylesheet" href="/styles/my-listings.css" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,50 +48,64 @@
       <form method="post" action="/search" class="search-form">
         <label for="name_or_description">Keyword:</label>
         <input name="name_or_description" id="name_or_description" style="overflow:hidden" placeholder="e.g. shoes, camera"></input>
-        <br>
-        <label for="minimum_price">Minimum Price ($):</label>
-        <input name="minimum_price" id="minimum_price" type="number" style="overflow:hidden"></input>
-        <label for="maximum_price">Maximum Price ($):</label>
-        <input name="maximum_price" id="maximum_price" type="number" style="overflow:hidden"></input>
-        <br>
+        <div class="search-prices">
+          <span><label for="minimum_price">Minimum Price ($):</label>
+          <input name="minimum_price" id="minimum_price" type="number" style="overflow:hidden"></input></span>
+          <span><label for="maximum_price">Maximum Price ($):</label>
+          <input name="maximum_price" id="maximum_price" type="number" style="overflow:hidden"></input></span>
+        </div>
         <button type="submit" class="submit-listing">Search</button>
       </form>
     </section>
-    <br>
+
     <!-- Search results here -->
     <section class="listings">
-      <h1>Search results:</h1>
+      <h2>Search results:</h2>
       <div class="product-listings-container">
       <% for (const listing of listings) { %>
         <div class="product-container">
-          <div class="product-image" style="background-image:url(https://placehold.co/350x350)"><img src=<%= listing.photo_url %> class="product-image"></div>
+          <div class="product-image" style="background-image:url(<%=listing.photo_url%>)">
+            <% if (!listing.is_available) { %>
+              <img
+                src="https://png.pngtree.com/png-clipart/20230423/ourmid/pngtree-sold-rubber-stamp-png-image_6718966.png"
+                class="sold-image">
+              <% } %>
+          </div>
           <div class="product-box">
-            <div class="product-name"><%=listing.name%></div>
-            <div class="product-price">$<%=listing.price%></div>
-            <div class="product-description"><%=listing.description%></div>
+            <div class="product-name">
+              <%= listing.name %>
+            </div>
+            <div class="product-price">$<%= listing.price %>
+            </div>
+            <div class="product-description">
+              <%= listing.description %>
+            </div>
             <div class="product-icons">
-              <div class="in-stock"><i class="fa-solid fa-circle-check"></i></div>
-              <div class="message-seller">
-                <a href="/messages">
-                  <i class="fa-regular fa-envelope"></i>
-                  <i class="fa-solid fa-envelope"></i>
-                </a>
+              <div class="in-stock">
+                <% if (listing.is_available) { %>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <% } %>
               </div>
+
+              <div class="message-seller">
+                <button class="open-button">
+                  <i class="fa-regular fa-comment"></i>
+                  <i class="fa-solid fa-comment"></i>
+                </button>
+              </div>
+
               <div class="add-favorite">
-                <form action="/add-to-favorites" method="post">
+                <form action="/add-to-favorites/<%= listing.id %>/<%= cookieStored %>" method="post">
+
                   <button type="submit">
                     <i class="fa-regular fa-heart"></i>
                     <i class="fa-solid fa-heart"></i>
                   </button>
-                </div>
+                  </form>
+              </div>
             </div>
           </div>
         </div>
-        <!-- <div class="listing">
-          <%=listing.name%>
-          <%=listing.description%>
-          <img src=<%= listing.photo_url %> class="listing-image">
-        </div> -->
       <% } %>
       </div>
     </section>
