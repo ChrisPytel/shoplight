@@ -1,33 +1,10 @@
 @import 'variables';
 
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgb(235, 184, 88) 0%,
-    rgb(219, 190, 163) 20%,
-    rgb(219, 178, 163) 34%,
-    rgb(235, 178, 201) 59%,
-    rgb(244, 211, 162) 74%,
-    rgb(255, 194, 153) 100%
-  );
+main {
+  padding-top: 200px;
 }
 
-
-h3{
-  font: 600 2rem "Syne", sans-serif;
-  color: $accent-color;
-}
-
-
-
-#email, #password{
+#email, #password {
   background-color: rgba(0, 0, 0, 0);
   // border: none;     /* disables the default border style*/
   resize: none;        /* disables the little corner expansion option */
@@ -40,22 +17,24 @@ h3{
   width: 100%;
   padding: 0 30px;
   height: 50px;
+
+  background-color: $primary-color;
+  border: 1px solid $secondary-color;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-weight: 400;
 }
 
-.btn{
+.btn {
   background: $lilac;
   color: white;
-  width: 7em;
-  height: 3em;
-  font-size: 1em;
-  padding: 0.5em 1em;
-  margin: 20px;
-  border: none;
-  border-radius: 0.5em;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font: 400 0.85rem $accent-font;
+  margin-top: 30px;
+  border: 0px solid transparent;
 }
 
- .btn:hover{
-  background: #ffbdad;
-  color: #ffffff;
-  transition: all 0.2s ease-in;
+ .btn:hover {
+  animation: buttonFlash 3s infinite;
 }

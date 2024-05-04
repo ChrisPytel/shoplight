@@ -1,7 +1,7 @@
 @import 'variables';
 
 .navbar {
-  width: calc(100vw - 10px);
+  width: 100vw;
   height: 100px;
   box-sizing: border-box;
   position: fixed;
@@ -22,7 +22,7 @@
 .nav-right {
   display: inline-flex;
   align-items: center;
-  font: 500 0.9rem "Montserrat", sans-serif;
+  font: 500 0.9rem $accent-font;
   color: $secondary-color;
   justify-self: end;
   column-gap: 10px;
@@ -71,7 +71,7 @@
   color: white;
   border-radius: 5px;
   padding: 10px 30px;
-  font: 400 0.85rem $primary-font;
+  font: 400 0.85rem $accent-font;
   margin-left: 20px;
 }
 

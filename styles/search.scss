@@ -1,10 +1,10 @@
 @import 'variables';
 
 main {
-  margin-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 100px;
 }
 
 .search-section {
@@ -12,81 +12,30 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-height: 50vh;
+  margin-bottom: 60px;
 }
 
 .search-form {
   width: 50vw;
-  height: 55vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 10px;
 }
 
-h1 {
-  font: 600 3rem "Syne", sans-serif;
+.search-form label {
+  font: 600 0.85rem $accent-font;
 }
 
-input, textarea {
-  border-radius: 5px;
-}
-
-textarea {
-  height: 150px;
-}
-
-.product-listings-container {
-  display: flex;
+.search-prices {
+  display: inline-flex;
   flex-direction: row;
+  justify-content: flex-start;
+  gap: 60px;
+  padding-top: 30px;
 }
 
-/* Product container styling */
-
-.product-container {
-  box-sizing: border-box;
-  width: calc(40vw + 2px);
-  max-width: 500px;
-  background-color: $primary-color;
-  border: 1px solid $border-color;
-}
-
-.product-image {
-  box-sizing: border-box;
-  width: 40vw;
-  max-width: 500px;
-  height: 350px;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.product-box {
-  padding: 30px 40px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-areas:
-    "name price"
-    "description description"
-    ". icons";
-  justify-content: stretch;
-  color: $text-color;
-}
-
-.product-name {
-  grid-area: name;
-  font: 700 1.35rem $primary-font;
-  text-transform: capitalize;
-}
-
-.product-price {
-  grid-area: price;
-  font: 700 1.35rem $primary-font;
-  text-transform: capitalize;
-  justify-self: end;
-}
-
-.product-description {
-  grid-area: description;
-  font: 1rem/2rem $primary-font;
-  padding: 20px 0px;
+.search-prices input {
+  max-width: 150px;
 }

@@ -20,7 +20,7 @@ body {
 }
 
 h1{
-  font: 400 3em $primary-font;
+  font: 400 3em $accent-font;
   color: $accent-color;
   display: flex;
   justify-content: center;  /* Aligns child elements horizontally (left and right) */
@@ -75,6 +75,7 @@ h1{
   background: $lilac;
   color: white;
   font-size: 1.2em;
+  font-family: $accent-font;
   padding: 0.5em 1em;
   margin: 20px;
   border: none;

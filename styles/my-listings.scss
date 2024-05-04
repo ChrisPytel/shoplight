@@ -1,13 +1,13 @@
 @import 'variables';
 
 main {
-  margin-top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .new-listing-section {
+  height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,13 +20,36 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 10px;
+}
+
+.new-listing-form label {
+  font: 600 0.85rem $accent-font;
 }
 
 input, textarea {
+  background-color: $primary-color;
+  border: 1px solid $secondary-color;
   border-radius: 5px;
+  padding: 10px 30px;
+  font-weight: 400;
 }
 
 textarea {
   height: 150px;
+}
+
+.submit-listing {
+  background: $lilac;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font: 400 0.85rem $accent-font;
+  margin: 30px auto auto auto;
+  border: 0px solid transparent;
+  width: 25vw;
+}
+
+ .submit-listing:hover {
+  animation: buttonFlash 3s infinite;
+  cursor: pointer;
 }

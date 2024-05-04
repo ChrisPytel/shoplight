@@ -52,7 +52,7 @@
 }
 
 .index-listings-top-filter {
-  font: 700 0.85rem $primary-font;
+  font: 700 0.85rem $accent-font;
   margin-bottom: 60px;
 }
 
@@ -113,13 +113,13 @@
 
 .product-name {
   grid-area: name;
-  font: 700 1.35rem $primary-font;
+  font: 700 1.35rem $accent-font;
   text-transform: capitalize;
 }
 
 .product-price {
   grid-area: price;
-  font: 700 1.35rem $primary-font;
+  font: 700 1.35rem $accent-font;
   text-transform: capitalize;
   justify-self: end;
 }
@@ -187,7 +187,7 @@
 }
 
 .form-popup label {
-  font: 700 1.35rem $primary-font;
+  font: 700 1.35rem $accent-font;
 }
 
 .form-container {
@@ -217,7 +217,7 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  font: 1rem/2rem $primary-font;
+  font: 1rem/2rem $accent-font;
 }
 
 .button-flash:hover {
