@@ -9,3 +9,31 @@ footer {
   background-color: $primary-color;
   margin-top: 120px;
 }
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: calc(100vw - 240px);
+}
+
+.footer-left {
+  justify-self: start;
+  align-self: center;
+  font: 500 0.85rem $accent-font;
+  color: $secondary-color;
+}
+
+.footer-left span {
+  padding-right: 60px;
+}
+
+.footer-right {
+  justify-self: end;
+  display: inline-flex;
+}
+
+.footer-right img {
+  width: 25px;
+  height: 25px;
+  margin-left: 30px;
+}
