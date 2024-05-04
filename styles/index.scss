@@ -250,11 +250,21 @@
   display: none;
 }
 
+@keyframes happyHop {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
 .add-favorite button:hover .fa-solid {
   display: inline-block;
   color: $red;
   text-shadow: 0 0 15px rgba(218, 27, 63, 0.5);
-  cursor: pointer;
+  cursor: pointer;  
+  animation: happyHop 0.2s ease-out infinite alternate;
 }
 
 .add-favorite button:hover .fa-regular {
