@@ -81,7 +81,7 @@
       <br>
       <!-- All existing listings here -->
       <section class="listings">
-        <h1>My listings:</h1>
+        <h2>My listings:</h2>
         <div class="product-listings-container">
           <% for (const listing of listings) { %>
             <div class="product-container">
@@ -102,6 +102,22 @@
                 <div class="product-description">
                   <%=listing.description%>
                 </div>
+
+                <div class="product-icons">
+                  <div class="edit-post-icon">
+                    <i class="fa-solid fa-pen"></i>
+                  </div>
+                  <div class="mark-as-sold-icon">
+                    <% if (listing.is_available) { %>
+                    <form action="/my-listings/sold/<%=listing.id%>" method="post">
+                      <button type="submit">
+                        <i class="fa-solid fa-check"></i>
+                      </button>
+                    </form>
+                    <% } %>
+                  </div>
+                </div>
+
               </div>
             </div>
             <% } %>
