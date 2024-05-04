@@ -53,3 +53,17 @@ textarea {
   animation: buttonFlash 3s infinite;
   cursor: pointer;
 }
+
+.edit-post-icon {
+  color: $text-color;
+  font-size: 1.25rem;
+  margin: 2px 0px 0px 0px;
+}
+
+.mark-as-sold-icon {
+  color: $text-color;
+}
+
+.edit-post-icon:hover, .mark-as-sold-icon button:hover {
+  cursor: pointer;
+}
