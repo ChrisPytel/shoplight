@@ -14,12 +14,14 @@ $(document).ready(function() {
     $('.message-container').css('opacity', '1');
     $('.inbox').css('opacity', '1');
     beginMailLoading();
+    playSfx(`https://files.catbox.moe/q60wtp.mp3`, `#secret-audio`, 2000);                         // Plays msn messenger sound
   });
   
 
   //Event listener to kickoff chain of fetchingMail from DB
   $('.refresh-icon').on('click', function(){
     console.log(`Refreshed Inbox.`);
+    playSfx(`https://files.catbox.moe/q60wtp.mp3`, `#secret-audio`, 2000);                         // Plays msn messenger sound
     beginMailLoading();
   });
   
@@ -45,49 +47,47 @@ $(document).ready(function() {
   };  
   
   
-  //1st in the chain
+  //1st in the chain of populating inbox
   const renderInboxItems = function(mailObjects) {      
     // console.log(`Our mailObjects: `, mailObjects);
-    $('.inbox').empty();                            //Purges any old Inbox Entries from page  
+    $('.inbox').empty();                                              //Purges any old Inbox Entries from page  
+    let initialDelay = 0, writeSpeed = 150;                           // for setTimeout()  [delay before writing begins | and speed in milliseconds between iterations]
 
-    let initialDelay = 0, writeSpeed = 150;  // delay before writing begins, and speed in milliseconds between iterations
-
-    for (let i = 0; i < mailObjects.length; i++) {                       // Refactored forEach into a C style to generate ID based on loop iteration
-      const id = i+1; 
+    for (let i = 0; i < mailObjects.length; i++) {                       // C style loop is used here to generate ID based on loop iteration #     
+      const id = i+1;                                                    // (id 1+1 to not begin at 0 index)
       
       setTimeout(() => {  // ---------------------------- Start of setTimeout ------------------------------
-        const entry = createInboxEntry(mailObjects[i], id);              // Passes the individual message to markup function and the ID from the Cstyle index
-        $('.inbox').append(entry);                                       // Takes return value and renders it in the inbox container    
+        const entry = createInboxEntry(mailObjects[i], id);                             // Passes the individual message to markup function and the ID from the Cstyle index
+        $('.inbox').append(entry);                                                      // Takes return value and renders it in the inbox container    
         
-        // Creates an event listener on the DOM to target THIS particular inbox item
-        $(`.inbox-id-${id}`).on('click', function(){                     
+        $(`.inbox-id-${id}`).on('click', function(){                                    // Creates an event listener on the DOM to target THIS particular inbox item         
           console.log(`Selected Inbox item #${id}!`);
-          toggleReadStatusVisibility(id, mailObjects[i]);
-          markAsOpened(id, mailObjects[i]);
+          toggleReadStatusVisibility(id, mailObjects[i]);                               // Toggles visibility of the Unread Messages with jquery/css
+          markAsOpened(id, mailObjects[i]);                                             // Actually marks them in the Database as opened
           $('.outgoing').empty();
           const message = renderMessage(mailObjects[i], id);                             // Creates our message markup and appends it to the drawing-space  
           $('.drawing-space').empty().append(message);                                   // Wipes any old messages from page, appends new one 
 
-          // Creates an event listener on the Reply Button to toggle form visibility
-          $('.reply-icon').on('click', function(){                
-            console.log('cool');
-
-            const replyForm = createReplyForm(mailObjects[i], id);
+          $('.reply-icon').on('click', function(){                                       // Creates an event listener on the Reply Button to toggle form visibility
+            const replyForm = createReplyForm(mailObjects[i], id);                  
             console.log(`Our replyForm is: `, replyForm);
-            $('.outgoing').empty().append(replyForm);
+            $('.outgoing').empty().append(replyForm);                                    // Clears container and adds a new reply-form for this message 
+
+            $('.send-button').on('click', function(){                                    // Adds an event listener to the send-button for playing sfx
+            $('.reply-form .textarea').val('');                                          // Clears the form  
+              playSfx(`https://files.catbox.moe/plt573.wav`, `#secret-audio`, 4000);     // Plays woosh sound
+            }); 
           });
-        });
-                
+        });                
       }, initialDelay);
       initialDelay = initialDelay + writeSpeed; // ---------- End of setTimeout ------------------------------
     }    
   };
 
-  //2nd in the chain
+  //2nd in the chain of populating inbox
   const createInboxEntry = function(message, id) {
     console.log(`Inbox item #${id} contains: `, message); 
     const readableDate = sqlDateConversion(message.date_sent)
-
 
     if (message.read_status === true){     //Creates an HTML markup depending on the read_status of the inbox item
       return $(`
@@ -168,6 +168,20 @@ $(document).ready(function() {
 
 
   // ---------------------------- Modular Functions ----------------------------
+
+
+  const playSfx = function(audioSrc, elementClass, timeoutDuration) {   
+    const audioElement = `   
+    <audio controls id='musicplayer' autoplay>
+    <source src="${audioSrc}" />
+    </audio>`
+
+    $(elementClass).append(audioElement).addClass(`not-visible`); 
+
+    setTimeout(() => {
+      $(`#musicplayer`).remove();      
+    }, timeoutDuration);
+  };
 
   //If a inbox item is unread, this updates the UI
   const toggleReadStatusVisibility = function(inboxID) {
