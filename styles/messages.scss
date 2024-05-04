@@ -88,9 +88,10 @@ h1{
 
 }
 .open-inbox:hover{
-  background: #ffbdad;
-  color: #ffffff;
-  transition: all 0.2s ease-in;
+  // background: #ffbdad;
+  // color: #ffffff;
+  // transition: all 0.2s ease-in;
+  animation: buttonFlash 3s infinite;
 }
 
 .open-inbox:visited{
@@ -300,6 +301,7 @@ h1{
 .reply-form button{
   background: $lilac;
   color: white;
+  width: 130px;
   font-size: 1.2em;
   padding: 0.5em 1em;
   margin: 20px;
@@ -314,4 +316,6 @@ h1{
   background: #ffbdad;
   color: #ffffff;
   transition: all 0.2s ease-in;
+  animation: buttonFlash 3s infinite;
+
 }
