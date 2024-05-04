@@ -283,6 +283,10 @@
   flex-shrink: 0;
 }
 
+.not-visible{
+  display: none;
+}
+
 
 /* Responsive design for phone */
 @media only screen and (max-width: 420px) {

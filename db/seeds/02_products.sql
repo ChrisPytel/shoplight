@@ -1,5 +1,5 @@
 INSERT INTO products (user_id, name, description, photo_url, price, is_featured, is_available) 
-VALUES (1, 'Vintage Leather Messenger Bag', 'Handcrafted vintage-style leather messenger bag, perfect for carrying laptops and documents. Made from genuine leather with adjustable shoulder straps.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO9jg-ct78uuHlUcsVGEOsLhjRCeQvCoiOI7OvmFmdvA&s', 120, true, true);
+VALUES (2, 'Vintage Leather Messenger Bag', 'Handcrafted vintage-style leather messenger bag, perfect for carrying laptops and documents. Made from genuine leather with adjustable shoulder straps.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO9jg-ct78uuHlUcsVGEOsLhjRCeQvCoiOI7OvmFmdvA&s', 120, true, true);
 
 INSERT INTO products (user_id, name, description, photo_url, price, is_featured, is_available) 
 VALUES (2, 'Wireless Bluetooth Headphones', 'High-quality wireless headphones with Bluetooth 5.0 technology. Features noise cancellation and long battery life, perfect for music lovers on the go.', 'https://m.media-amazon.com/images/I/41JACWT-wWL._AC_UF894,1000_QL80_.jpg', 80, false, true);

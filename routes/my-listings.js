@@ -59,7 +59,8 @@ router.post("/", (req, res) => {
         listings: products,
       };
       // console.log(templateVars);
-      return res.render('my-listings', templateVars);
+      // return res.render('my-listings', templateVars);
+      res.redirect(`/my-listings`);
     })
     .catch((err) => {
       console.log(err.message);

@@ -88,3 +88,9 @@ button{
   color: inherit;
   border: inherit;
 }
+
+@media only screen and (max-width: 1024px) {
+  .nav-left img {
+  display:none;
+  }
+}

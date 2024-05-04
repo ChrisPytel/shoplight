@@ -65,7 +65,7 @@ router.get('/', (req, res) => {
 
       //POSTING via a standard button on a form will result in page waiting for a response         /* Option A - Do nothing and press escape to prevent timeout */                 
       // res.status(201).send({server: "Sent message to user", message});                         /* Option B, send a response in the form of a status and an object */    
-      // res.redirect(`/messages`);                                                              /* Option C, redirect */ 
+      // res.redirect(`/messages`);                                                              /* Option C, redirect to another page */ 
       })
       .catch((err) => {
       console.error('Promise Rejected:', err);

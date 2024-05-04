@@ -34,7 +34,7 @@ h1{
 }
 
 .incoming{
-  margin-top: 400px;
+  margin-top: 200px;
   display: flex;
   justify-content: space-between;
   // border: 3px dashed fuchsia;
@@ -182,6 +182,10 @@ h1{
 
 .is-visible{
   display: block;
+}
+
+.not-visible{
+  display: none;
 }
 
 @keyframes wobble {

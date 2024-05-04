@@ -177,6 +177,51 @@
 
     <%- include('partials/_footer.ejs') %>
 
+    <div id="secret-audio">
+      <!--  Stretch: Append audio elements here -->    
+    </div>
+
+
+
 </body>
+
+    <script>
+      setTimeout(() => { // -------------- runs after 4 seconds for page elements to load in --------------
+        console.log("4 seconds have passed");
+
+        $('.add-favorite').on('click', function(event){                    // class or id for the event listener target
+          console.log(`Hearted an item!`);
+
+          const audioElement = `   
+          <audio controls id='musicplayer' autoplay>
+          <source src="https://files.catbox.moe/zmkwn7.wav" />                   
+          </audio>`
+    
+          $(`#secret-audio`).append(audioElement).addClass(`not-visible`);     //adds the music player and autoplays
+    
+          setTimeout(() => {
+            $(`#musicplayer`).remove();  
+          }, 4000);                                                             //removes the player after 4 seconds
+        });
+        
+        $('#sendMessageButton').on('click', function(event){                    // class or id for the event listener target
+          console.log(`Sent a message!`);
+
+          const audioElement = `   
+          <audio controls id='musicplayer' autoplay>
+          <source src="https://files.catbox.moe/plt573.wav " />                   
+          </audio>`
+    
+          $(`#secret-audio`).append(audioElement).addClass(`not-visible`);     //adds the music player and autoplays
+    
+          setTimeout(() => {
+            $(`#musicplayer`).remove();  
+          }, 4000);                                                             //removes the player after 4 seconds
+        });
+
+
+        
+      }, 4000);   // -------------- runs after 4 seconds for page elements to load in --------------
+  </script>
 
 </html>
