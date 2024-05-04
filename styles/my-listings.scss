@@ -60,8 +60,18 @@ textarea {
   margin: 2px 0px 0px 0px;
 }
 
+.edit-post-icon:hover {
+  color: $green;
+  text-shadow: 0 0 15px rgba(115, 184, 33, 0.5)
+}
+
 .mark-as-sold-icon {
   color: $text-color;
+}
+
+.mark-as-sold-icon button:hover {
+  color: $red;
+  text-shadow: 0 0 15px rgba(218, 27, 63, 0.5);
 }
 
 .edit-post-icon:hover, .mark-as-sold-icon button:hover {
