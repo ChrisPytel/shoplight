@@ -1,7 +1,11 @@
 @import 'variables';
 
 main {
-  margin-top: -100px
+  // margin-top: 100px;
+  // height: calc(100vh - 220px);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 #email, #password {
@@ -37,4 +41,9 @@ main {
 
  .btn:hover {
   animation: buttonFlash 3s infinite;
+}
+
+.footer-login {
+  position: absolute;
+  bottom: 0;
 }
