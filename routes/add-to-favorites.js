@@ -16,7 +16,7 @@ router.post("/:productId/:userId", (req, res) => {
 
   Promise.all([displayNamePromise, myFavouriteProducts, newFavorite])
     .then(([]) => {
-      return res.redirect('/favourites');
+      console.log(res);
     })
     .catch((err) => {
       console.log(err.message);
