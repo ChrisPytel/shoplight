@@ -51,9 +51,15 @@
   padding: 60px 120px 0px 120px;
 }
 
+.index-listings-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .index-listings-top-filter {
   font: 700 0.85rem $accent-font;
-  margin-bottom: 60px;
 }
 
 .index-listings-top-filter select {
