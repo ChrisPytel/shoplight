@@ -50,18 +50,15 @@ router.get('/', (req, res) => {
 //Handles any post requests on messages
   router.post("/", (req, res) => {
     const cookieStored = req.session.user_id;
-    console.log(cookieStored);
-    console.log(typeof cookieStored);
+    console.log(`Cookie value for user user ID#:`, cookieStored);
+    console.log("Entered the post route for sending replies to DB WOW!\nWe've got this from the form:", req.body);
 
-    console.log("Entered the post route for sending replies to DB WOW!");
-    console.log(req.body);
-    console.log(`Reply TEXT: `, req.body.text);
-    console.log(`Reply TO userID#: `, req.body.user_id_to);
-    console.log(`Reply FROM userID#: `, req.body.user_id_from);
-    console.log(`Reply PROD#: `, req.body.product_id);
+    console.log(`Message TEXT: `, req.body.text);
+    console.log(`Directed TO userID#: ${req.body.user_id_to}. Sent FROM userID#: ${req.body.user_id_from}. About productID#: ${req.body.product_id}`);
+
     postMessage.sendMessage(req.body.text, req.body.user_id_to, req.body.user_id_from, req.body.product_id)
-      .then((message) => {
-      console.log('postMessage Promise Resolved:', message);    
+      .then((dbReturn) => {
+      console.log('postMessage Promise Resolved:\n', dbReturn);    
 
       //POSTING via a standard button on a form will result in page waiting for a response         /* Option A - Do nothing and press escape to prevent timeout */                 
       // res.status(201).send({server: "Sent message to user", message});                         /* Option B, send a response in the form of a status and an object */    
