@@ -12,7 +12,8 @@ const sendMessage = (message, personTo, personFrom, productID) => {
   RETURNING *;`;
   return db.query(queryString, queryArray)                //Refactored to handle .catch in the location the promise is resolved
     .then((res) => {                                            
-      console.log(`Sucessfully POSTED to DB: `, res.rows[0]);        
+      console.log(`Sucessfully POSTED to DB! returning value to complete promise`);   
+      return res.rows[0];                                  //added return to log info when promise is resolved 
     })
 };
 
