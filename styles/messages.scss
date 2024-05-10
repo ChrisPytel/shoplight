@@ -282,10 +282,10 @@ h1{
 
 .replying-to{
   padding: 30px;
+  margin:0;
 }
 
-
-.textarea{
+#textArea{
   background-color: rgba(0, 0, 0, 0);
   border: none;     /* disables the default border style*/
   resize: none;        /* disables the little corner expansion option */
