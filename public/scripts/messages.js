@@ -153,8 +153,8 @@ $(document).ready(function() {
     <section class = "outgoing">
       <div class = "reply-form-container form-${id}">
         <form class="reply-form" method="POST" action="/messages">
-          <p class="replying-to">Replying to <b>${xssSanitize(message.from)}</b> </p>
-          <textarea placeholder="My Reply..." name="text" type="text" class="textarea"></textarea>
+          <p class="replying-to">Replying to <b>${xssSanitize(message.from)}</b> </p>   
+          <textarea type="text" id="textArea" name="text" placeholder="My Reply..." required></textarea>
           <input type="hidden" id="reply_from" name="user_id_from" value="${message.user_id_to}">
           <input type="hidden" id="reply_to" name="user_id_to" value="${message.user_id_from}">
           <input type="hidden" id="listing" name="product_id" value="${message.product_id}">
@@ -165,7 +165,11 @@ $(document).ready(function() {
     `);
   };
  
+/* Error, form would not submit the text to the POST route, all other input types were valid */
 
+/*   <textarea type="text" id="sendMessage" placeholder="My Reply..." name="text" required></textarea>         this works,     changed it back to textarea with an ID instead*/ 
+/*   <input type="text" id="sendMessage" placeholder="My Reply...!" name="text" required></input>           this works ,       changed to ID, input doesnt wrap text though*/
+/*   <textarea type="text" class="textarea" placeholder="My Reply..." name="text"  ></textarea>         original, didnt work,  class broke the functionality*/
 
   // ---------------------------- Modular Functions ----------------------------
 
